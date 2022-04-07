@@ -1,15 +1,12 @@
 package com.example.hotplenavigation.view
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.hotplenavigation.R
+import com.example.hotplenavigation.base.BindingActivity
+import com.example.hotplenavigation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
+    override fun initView() {
     }
 }
