@@ -10,6 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotPleNavigation">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="ar2g8doh3e" />
         <activity
             android:name=".view.test.TestActivity"
             android:exported="true" />
