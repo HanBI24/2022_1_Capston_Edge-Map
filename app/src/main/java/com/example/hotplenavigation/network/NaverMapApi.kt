@@ -1,5 +1,6 @@
 package com.example.hotplenavigation.network
 
+import com.example.hotplenavigation.data.geo_reverse.ReverseGeoApi
 import com.example.hotplenavigation.data.get_result_path.GetResultPath
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,4 +17,13 @@ interface NaverMapApi {
         @Query("goal") goal: String,
         @Query("option") option: String,
     ): Call<GetResultPath>
+
+    @GET("v2/gc")
+    fun getReverseGeo(
+        @Header("X-NCP-APIGW-API-KEY-ID") apiKeyId: String,
+        @Header("X-NCP-APIGW-API-KEY") apiKey: String,
+        @Query("coords") coords: String,
+        @Query("output") output: String = "json",
+        @Query("orders") orders: String = "addr"
+    ): Call<ReverseGeoApi>
 }

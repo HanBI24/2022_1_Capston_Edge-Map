@@ -1,6 +1,7 @@
 package com.example.hotplenavigation.view.test
 
 import android.graphics.Color
+import android.util.Log
 import androidx.activity.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
@@ -34,6 +35,13 @@ class TestActivity :
             "traavoidtoll"
         )
 
+        var numCount = 0
+        testActivityViewModel.geoCode.observe(this, {
+            numCount++
+            binding.tvGuide.append(it.toString())
+            Log.d("TestActivityLog", "$it, 개수: $numCount")
+        })
+
         testActivityViewModel.getResultPath.observe(this, {
             val path = PathOverlay()
             var routesCount = 0
@@ -46,9 +54,38 @@ class TestActivity :
                     }
                 }
             }
-            path.coords = pathContainer.drop(1)
-            path.color = Color.RED
-            path.map = naverMap
+
+//            binding.tvGuide.append(pathContainer.toString())
+
+            val pathGuideX: MutableList<Double> = mutableListOf()
+            val pathGuideY: MutableList<Double> = mutableListOf()
+            var k = 0
+            if(it!= null) {
+                for(pathCode in it){
+                    for(pathCodeXY in pathCode.path) {
+                        pathGuideX.add(pathCodeXY[1])
+                        pathGuideY.add(pathCodeXY[0])
+                    }
+//                    pathGuide.add(pathCode.path[k])
+                    k++
+                }
+            }
+//            binding.tvGuide.append(pathGuide.toString())
+//            binding.tvGuide.append(it[0].path[3000][1].toString())
+
+            for((kk, _) in pathGuideX.withIndex()) {
+                testActivityViewModel.getReverseGeoApi(
+                    "uzlzuhd2pa",
+                    "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
+                    "${pathGuideY[kk]},${pathGuideX[kk]}"
+                    )
+            }
+
+            path.apply {
+                coords = pathContainer.drop(1)
+                color = Color.RED
+                map = naverMap
+            }
 
             /*zoomRatio = when ((it[0].summary.distance * 0.001).toInt()) {
                 in 10..29 -> 11.0
@@ -59,21 +96,19 @@ class TestActivity :
                 else -> 11.0
             }*/
 
-            val CenterLatlng =
+            val centerLatLng =
                 LatLng(it[0].path[routesCount / 2][1], it[0].path[routesCount / 2][0])
             naverMap.moveCamera(
-                CameraUpdate.scrollAndZoomTo(CenterLatlng, zoomRatio)
+                CameraUpdate.scrollAndZoomTo(centerLatLng, zoomRatio)
                     .animate(CameraAnimation.Fly, 2000)
             )
 
-            val marker = Marker()
-            marker.position = LatLng(it[0].path[routesCount - 1][1], it[0].path[routesCount - 1][0])
-            marker.map = naverMap
+//             marker.position = LatLng(it[0].path[routesCount - 1][1], it[0].path[routesCount - 1][0])
+//             marker.map = naverMap
         })
     }
 
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
-
     }
 }

@@ -14,10 +14,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
     private const val baseGetResultPathURL = "https://naveropenapi.apigw.ntruss.com/map-direction/"
+    private const val baseReverseGeoURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class GetResultPathType
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class ReverseGeoType
 
     @Singleton
     @Provides
@@ -33,6 +38,23 @@ object RetrofitModule {
     fun provideGetRetroInstanceGetResultPath(): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseGetResultPathURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    @Singleton
+    @Provides
+    @ReverseGeoType
+    fun provideGetRetroServiceInterfaceReverseGeo(
+        @ReverseGeoType retrofit: Retrofit
+    ): NaverMapApi =
+        retrofit.create(NaverMapApi::class.java)
+
+    @Singleton
+    @Provides
+    @ReverseGeoType
+    fun provideGetRetroInstanceReverseGeo(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(baseReverseGeoURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }
