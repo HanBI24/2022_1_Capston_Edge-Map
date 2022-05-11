@@ -3,8 +3,6 @@ package com.example.hotplenavigation.view.test
 import android.graphics.Color
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.asFlow
-import androidx.lifecycle.distinctUntilChanged
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityTestBinding
@@ -14,10 +12,8 @@ import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class TestActivity :
@@ -41,7 +37,7 @@ class TestActivity :
         )
 
         testActivityViewModel.searchResult.observe(this, {
-            for(i in it) {
+            for (i in it) {
                 searchResultList.add(i.title)
                 binding.tvGuide.append(searchResultList.iterator().next())
             }
@@ -81,21 +77,21 @@ class TestActivity :
 
             val pathGuideX: MutableList<Double> = mutableListOf()
             val pathGuideY: MutableList<Double> = mutableListOf()
-            if(it!= null) {
-                for(pathCode in it){
-                    for(pathCodeXY in pathCode.path) {
+            if (it != null) {
+                for (pathCode in it) {
+                    for (pathCodeXY in pathCode.path) {
                         pathGuideX.add(pathCodeXY[1])
                         pathGuideY.add(pathCodeXY[0])
                     }
                 }
             }
 
-            for((kk, _) in pathGuideX.withIndex()) {
+            for ((kk, _) in pathGuideX.withIndex()) {
                 testActivityViewModel.getReverseGeoApi(
                     "uzlzuhd2pa",
                     "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
                     "${pathGuideY[kk]},${pathGuideX[kk]}"
-                    )
+                )
             }
 
             path.apply {
@@ -125,3 +121,4 @@ class TestActivity :
         this.naverMap = naverMap
     }
 }
+// 빨리해 이제 사랑해

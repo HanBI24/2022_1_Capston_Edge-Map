@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable/bottom_nav_bg.xml" value="0.21388888888888888" />
+        <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable/ic_search.xml" value="0.21388888888888888" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/activity_main.xml" value="0.2390625" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/activity_test.xml" value="0.1296875" />
+        <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/menu/bottom_menu.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>

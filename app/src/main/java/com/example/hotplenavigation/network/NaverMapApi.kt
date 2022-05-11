@@ -2,7 +2,6 @@ package com.example.hotplenavigation.network
 
 import com.example.hotplenavigation.data.geo_reverse.ReverseGeoApi
 import com.example.hotplenavigation.data.get_result_path.GetResultPath
-import com.example.hotplenavigation.data.search_result.Item
 import com.example.hotplenavigation.data.search_result.SearchResultData
 import retrofit2.Call
 import retrofit2.http.GET

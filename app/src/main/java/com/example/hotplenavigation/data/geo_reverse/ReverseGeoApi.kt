@@ -36,4 +36,3 @@ data class Area3(
 data class Area4(
     val name: String?
 )
-

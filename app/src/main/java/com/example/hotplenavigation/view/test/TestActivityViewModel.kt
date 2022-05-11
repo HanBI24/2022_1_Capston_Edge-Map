@@ -1,9 +1,7 @@
 package com.example.hotplenavigation.view.test
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.distinctUntilChanged
 import com.example.hotplenavigation.base.BaseViewModel
 import com.example.hotplenavigation.data.geo_reverse.Result1
 import com.example.hotplenavigation.data.get_result_path.Traavoidtoll

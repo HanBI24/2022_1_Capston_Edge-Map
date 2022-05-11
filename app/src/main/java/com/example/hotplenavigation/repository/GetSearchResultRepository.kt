@@ -9,7 +9,6 @@ import com.example.hotplenavigation.network.NaverMapApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Thread.sleep
 import javax.inject.Inject
 
 class GetSearchResultRepository @Inject constructor(
@@ -25,9 +24,9 @@ class GetSearchResultRepository @Inject constructor(
         liveData: MutableLiveData<List<Item>>
     ) {
         val call = searchResult.getSearchResult(apiKeyId, apiKey, display, start, sort, query)
-        call.enqueue(object: Callback<SearchResultData> {
+        call.enqueue(object : Callback<SearchResultData> {
             override fun onResponse(call: Call<SearchResultData>, response: Response<SearchResultData>) {
-                if(response.body() != null && response.isSuccessful) {
+                if (response.body() != null && response.isSuccessful) {
                     liveData.postValue(response.body()!!.items)
                 } else {
                     Log.d("GetSearchRepository", "NULL")
@@ -38,7 +37,6 @@ class GetSearchResultRepository @Inject constructor(
             override fun onFailure(call: Call<SearchResultData>, t: Throwable) {
                 Log.d("GetSearchRepository", "FAIL")
             }
-
         })
     }
 }
