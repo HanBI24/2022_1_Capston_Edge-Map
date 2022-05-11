@@ -1,19 +1,24 @@
 package com.example.hotplenavigation.view.test
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import com.example.hotplenavigation.base.BaseViewModel
 import com.example.hotplenavigation.data.geo_reverse.Result1
 import com.example.hotplenavigation.data.get_result_path.Traavoidtoll
+import com.example.hotplenavigation.data.search_result.Item
 import com.example.hotplenavigation.repository.GetResultPathRepository
 import com.example.hotplenavigation.repository.GetReverseGeoCodeRepository
+import com.example.hotplenavigation.repository.GetSearchResultRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class TestActivityViewModel @Inject constructor(
     private val getResultPathRepository: GetResultPathRepository,
-    private val getReverseGeoCodeRepository: GetReverseGeoCodeRepository
+    private val getReverseGeoCodeRepository: GetReverseGeoCodeRepository,
+    private val getSearchResultRepository: GetSearchResultRepository
 ) : BaseViewModel() {
 
     private val _getResultPath = MutableLiveData<List<Traavoidtoll>>()
@@ -25,8 +30,16 @@ class TestActivityViewModel @Inject constructor(
         get() = _getResultPathGuide
 
     private val _geoCode = MutableLiveData<Result1>()
-    val geoCode: MutableLiveData<Result1>
+    val geoCode: LiveData<Result1>
         get() = _geoCode
+
+    private val _geoCodeList = MutableLiveData<List<Result1>>()
+    val geoCodeList: LiveData<List<Result1>>
+        get() = _geoCodeList
+
+    private val _searchResult = MutableLiveData<List<Item>>()
+    val searchResult: LiveData<List<Item>>
+        get() = _searchResult
 
     fun getResultPath(
         apiKeyId: String,
@@ -44,5 +57,16 @@ class TestActivityViewModel @Inject constructor(
         coords: String,
     ) {
         getReverseGeoCodeRepository.makeReverseGeoApiCall(apiKeyId, apiKey, coords, _geoCode)
+    }
+
+    fun getSearchResult(
+        apiKeyId: String,
+        apiKey: String,
+        display: Int,
+        start: Int,
+        sort: String,
+        query: String,
+    ) {
+        getSearchResultRepository.makeSearchResultApiCall(apiKeyId, apiKey, display, start, sort, query, _searchResult)
     }
 }

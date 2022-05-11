@@ -2,6 +2,8 @@ package com.example.hotplenavigation.network
 
 import com.example.hotplenavigation.data.geo_reverse.ReverseGeoApi
 import com.example.hotplenavigation.data.get_result_path.GetResultPath
+import com.example.hotplenavigation.data.search_result.Item
+import com.example.hotplenavigation.data.search_result.SearchResultData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -26,4 +28,14 @@ interface NaverMapApi {
         @Query("output") output: String = "json",
         @Query("orders") orders: String = "addr"
     ): Call<ReverseGeoApi>
+
+    @GET("v1/search/local.json")
+    fun getSearchResult(
+        @Header("X-Naver-Client-Id") apiKeyId: String,
+        @Header("X-Naver-Client-Secret") apiKey: String,
+        @Query("display") display: Int,
+        @Query("start") start: Int,
+        @Query("sort") sort: String,
+        @Query("query") query: String
+    ): Call<SearchResultData>
 }

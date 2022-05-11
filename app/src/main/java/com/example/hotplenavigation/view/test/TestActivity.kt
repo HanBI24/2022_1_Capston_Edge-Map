@@ -3,6 +3,8 @@ package com.example.hotplenavigation.view.test
 import android.graphics.Color
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.distinctUntilChanged
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityTestBinding
@@ -15,6 +17,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class TestActivity :
@@ -23,6 +26,8 @@ class TestActivity :
     private val testActivityViewModel: TestActivityViewModel by viewModels()
     private lateinit var naverMap: NaverMap
     private var zoomRatio: Double = 11.0
+    private val regionMutableList = mutableSetOf<String>()
+    private val searchResultList = mutableSetOf<String>()
 
     override fun initView() {
         setNaverMapRender(R.id.map_fragment, supportFragmentManager, this)
@@ -30,16 +35,35 @@ class TestActivity :
         testActivityViewModel.getResultPath(
             "uzlzuhd2pa",
             "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
-            "127.1058342,37.359708",
-            "129.075986,35.179470",
+            "127.09431687965,37.513272317072",
+            "127.7299707,37.8813153",
             "traavoidtoll"
         )
+
+        testActivityViewModel.searchResult.observe(this, {
+            for(i in it) {
+                searchResultList.add(i.title)
+                binding.tvGuide.append(searchResultList.iterator().next())
+            }
+        })
 
         var numCount = 0
         testActivityViewModel.geoCode.observe(this, {
             numCount++
-            binding.tvGuide.append(it.toString())
-            Log.d("TestActivityLog", "$it, 개수: $numCount")
+//            binding.tvGuide.append(it.region?.area3.toString())
+            val regionName1 = it.region?.area3.toString().split("=")
+            val regionName2 = regionName1[1].split(")")
+            regionMutableList.add(regionName2[0])
+            Log.d("TestActivityLog", "${regionName2[0]} 개수: $numCount")
+
+            testActivityViewModel.getSearchResult(
+                "oViKm6VRvRLKpY8LpKuK",
+                "6JiG572cvL",
+                3,
+                1,
+                "comment",
+                regionName2[0]
+            )
         })
 
         testActivityViewModel.getResultPath.observe(this, {
@@ -55,23 +79,16 @@ class TestActivity :
                 }
             }
 
-//            binding.tvGuide.append(pathContainer.toString())
-
             val pathGuideX: MutableList<Double> = mutableListOf()
             val pathGuideY: MutableList<Double> = mutableListOf()
-            var k = 0
             if(it!= null) {
                 for(pathCode in it){
                     for(pathCodeXY in pathCode.path) {
                         pathGuideX.add(pathCodeXY[1])
                         pathGuideY.add(pathCodeXY[0])
                     }
-//                    pathGuide.add(pathCode.path[k])
-                    k++
                 }
             }
-//            binding.tvGuide.append(pathGuide.toString())
-//            binding.tvGuide.append(it[0].path[3000][1].toString())
 
             for((kk, _) in pathGuideX.withIndex()) {
                 testActivityViewModel.getReverseGeoApi(
@@ -102,12 +119,8 @@ class TestActivity :
                 CameraUpdate.scrollAndZoomTo(centerLatLng, zoomRatio)
                     .animate(CameraAnimation.Fly, 2000)
             )
-
-//             marker.position = LatLng(it[0].path[routesCount - 1][1], it[0].path[routesCount - 1][0])
-//             marker.map = naverMap
         })
     }
-
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
     }

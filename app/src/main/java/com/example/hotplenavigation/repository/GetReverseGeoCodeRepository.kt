@@ -1,6 +1,7 @@
 package com.example.hotplenavigation.repository
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import com.example.hotplenavigation.data.geo_reverse.Result1
 import com.example.hotplenavigation.data.geo_reverse.ReverseGeoApi
 import com.example.hotplenavigation.di.RetrofitModule
@@ -24,8 +25,9 @@ class GetReverseGeoCodeRepository @Inject constructor(
         call.enqueue(object : Callback<ReverseGeoApi> {
             override fun onResponse(call: Call<ReverseGeoApi>, response: Response<ReverseGeoApi>) {
                 try {
-                    if (response.body() != null && response.isSuccessful)
+                    if (response.body() != null && response.isSuccessful) {
                         liveDataList.postValue(response.body()!!.results?.get(0))
+                    }
                     else
                         liveDataList.postValue(null)
                 } catch (indexOut: IndexOutOfBoundsException) {
