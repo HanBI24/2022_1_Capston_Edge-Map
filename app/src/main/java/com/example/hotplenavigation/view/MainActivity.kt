@@ -1,10 +1,12 @@
 package com.example.hotplenavigation.view
 
 import android.content.Intent
+import androidx.activity.viewModels
 import androidx.annotation.UiThread
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityMainBinding
+import com.example.hotplenavigation.util.extension.replace
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.BottomMenuActivity
 import com.naver.maps.map.LocationTrackingMode
@@ -15,8 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity :
-    BindingActivity<ActivityMainBinding>(R.layout.activity_main),
-    OnMapReadyCallback {
+    BindingActivity<ActivityMainBinding>(R.layout.activity_main), OnMapReadyCallback {
+
+    private val mainActivityViewModel: MainActivityViewModel by viewModels()
     private lateinit var naverMap: NaverMap
 
     override fun initView() {

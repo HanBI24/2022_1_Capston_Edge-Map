@@ -11,7 +11,7 @@ fun AppCompatActivity.replace(
     supportFragmentManager
         .beginTransaction()
         .replace(frameId, fragment, null)
-        .commit()
+        .commitAllowingStateLoss()
 }
 
 fun AppCompatActivity.replaceToBackStack(

@@ -20,18 +20,15 @@ class GetResultPathRepository @Inject constructor(
         start: String,
         goal: String,
         option: String,
-        liveDataList: MutableLiveData<List<Traavoidtoll>>,
-        liveDataListGuide: MutableLiveData<List<Traavoidtoll>>
+        liveDataList: MutableLiveData<List<Traavoidtoll>>
     ) {
         val call = naverMapGetResultPath.getResultPath(apiKeyId, apiKey, start, goal, option)
         call.enqueue(object : Callback<GetResultPath> {
             override fun onResponse(call: Call<GetResultPath>, response: Response<GetResultPath>) {
                 if (response.body() != null && response.isSuccessful) {
                     liveDataList.postValue(response.body()?.route?.traavoidtoll!!)
-                    liveDataListGuide.postValue(response.body()?.route?.traavoidtoll!!)
                 } else {
                     liveDataList.postValue(null)
-                    liveDataListGuide.postValue(null)
                 }
             }
 

@@ -1,5 +1,7 @@
 package com.example.hotplenavigation.network
 
+import com.example.hotplenavigation.data.geo.Addresse
+import com.example.hotplenavigation.data.geo.GeoApi
 import com.example.hotplenavigation.data.geo_reverse.ReverseGeoApi
 import com.example.hotplenavigation.data.get_result_path.GetResultPath
 import com.example.hotplenavigation.data.search_result.SearchResultData
@@ -37,4 +39,11 @@ interface NaverMapApi {
         @Query("sort") sort: String,
         @Query("query") query: String
     ): Call<SearchResultData>
+
+    @GET("v2/geocode")
+    fun getGeoCode(
+        @Header("X-NCP-APIGW-API-KEY-ID") apiKeyId: String,
+        @Header("X-NCP-APIGW-API-KEY") apiKey: String,
+        @Query("query") query: String
+    ): Call<GeoApi>
 }

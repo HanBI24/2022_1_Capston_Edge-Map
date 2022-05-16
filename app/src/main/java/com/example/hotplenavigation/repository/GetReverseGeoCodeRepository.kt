@@ -25,9 +25,11 @@ class GetReverseGeoCodeRepository @Inject constructor(
             override fun onResponse(call: Call<ReverseGeoApi>, response: Response<ReverseGeoApi>) {
                 try {
                     if (response.body() != null && response.isSuccessful) {
-                        liveDataList.postValue(response.body()!!.results?.get(0))
-                    } else
-                        liveDataList.postValue(null)
+//                        liveDataList.postValue(response.body()!!.results?.get(0))
+                        liveDataList.value = response.body()!!.results?.get(0)
+                    }
+//                    else
+//                        liveDataList.postValue(null)
                 } catch (indexOut: IndexOutOfBoundsException) {
                 }
             }

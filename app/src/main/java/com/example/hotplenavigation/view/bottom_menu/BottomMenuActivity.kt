@@ -21,6 +21,11 @@ class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.a
         getDataFromActivity()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        getDataFromActivity()
+    }
+
     private fun getDataFromActivity() {
         val isSelectedBottomMenu = intent.extras?.getString("bottom_nav")!!
         replaceFragment(isSelectedBottomMenu)

@@ -1,17 +1,21 @@
 package com.example.hotplenavigation.view.bottom_menu.search
 
+import android.content.Intent
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
 import com.example.hotplenavigation.databinding.FragmentBookmarkBinding
 import com.example.hotplenavigation.databinding.FragmentSearchBinding
+import com.example.hotplenavigation.view.MainActivityViewModel
+import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivity
 import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
-    private val searchFragmentViewModel: SearchFragmentViewModel by viewModels()
+    private val searchFragmentViewModel: SearchFragmentViewModel by activityViewModels()
 
     override fun initView() {
         multiSearchViewInit()
@@ -24,7 +28,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
             }
 
             override fun onSearchComplete(index: Int, s: CharSequence) {
-                searchFragmentViewModel.searchWordData.value = s.toString()
+                val intent = Intent(context, SearchResultActivity::class.java)
+                intent.putExtra("search_fragment", s.toString())
+                startActivity(intent)
             }
 
             override fun onSearchItemRemoved(index: Int) {
@@ -35,8 +41,5 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
 
             }
         })
-    }
-
-    private fun setWordToViewModel(word: String) {
     }
 }

@@ -27,6 +27,10 @@
             android:exported="true" />
         <activity android:name=".view.bottom_menu.BottomMenuActivity"
             android:exported="true" />
+        <activity android:name=".view.bottom_menu.search.search_result.SearchResultActivity"
+            android:exported="true" />
+        <activity android:name=".view.bottom_menu.search.search_result.set_marker.MarkerActivity"
+            android:exported="true" />
 
         <activity
             android:name=".view.MainActivity"

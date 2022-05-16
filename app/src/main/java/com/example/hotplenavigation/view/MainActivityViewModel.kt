@@ -1,13 +1,14 @@
-package com.example.hotplenavigation.view.bottom_menu.search
+package com.example.hotplenavigation.view
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+
 @HiltViewModel
-class SearchFragmentViewModel @Inject constructor(
+class MainActivityViewModel @Inject constructor(
+
 ) : ViewModel() {
 
 }
-

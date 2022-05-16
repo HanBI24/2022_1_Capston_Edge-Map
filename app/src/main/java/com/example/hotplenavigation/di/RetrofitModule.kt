@@ -16,6 +16,7 @@ object RetrofitModule {
     private const val baseGetResultPathURL = "https://naveropenapi.apigw.ntruss.com/map-direction/"
     private const val baseReverseGeoURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/"
     private const val baseSearchResultURL = "https://openapi.naver.com/"
+    private const val baseGeoURL = "https://naveropenapi.apigw.ntruss.com/map-geocode/"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
@@ -28,6 +29,10 @@ object RetrofitModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class SearchResultType
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class GeoType
 
     @Singleton
     @Provides
@@ -77,6 +82,23 @@ object RetrofitModule {
     fun provideGetRetroInstanceSearchResult(): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseSearchResultURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    @Singleton
+    @Provides
+    @GeoType
+    fun provideGetRetroServiceInterfaceGeoCode(
+        @GeoType retrofit: Retrofit
+    ): NaverMapApi =
+        retrofit.create(NaverMapApi::class.java)
+
+    @Singleton
+    @Provides
+    @GeoType
+    fun provideGetRetroInstanceGeoCode(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(baseGeoURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }
