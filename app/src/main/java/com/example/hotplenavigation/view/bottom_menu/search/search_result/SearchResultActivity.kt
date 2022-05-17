@@ -10,7 +10,7 @@ import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.FragmentSearchResultBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
-import com.example.hotplenavigation.view.bottom_menu.search.search_result.set_marker.MarkerActivity
+import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
@@ -46,15 +46,11 @@ class SearchResultActivity :
     private lateinit var infoWindow: InfoWindow
     private lateinit var marker: Marker
     private val markerList = mutableListOf<Marker>()
+    private val sheet: BottomSheetFragment by lazy { BottomSheetFragment() }
 
     override fun initView() {
         val word = intent.getStringExtra("search_fragment")
         setNaverMapRender(R.id.map_fragment, supportFragmentManager, this)
-
-        binding.btnMarkerActivity.setOnClickListener {
-            val intent = Intent(this, MarkerActivity::class.java)
-            startActivity(intent)
-        }
 
         infoWindow = InfoWindow()
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(this) {
@@ -82,22 +78,27 @@ class SearchResultActivity :
                     marker.tag = i
                 }
 
+                for(i in searchResultAddressList) {
+                    marker.captionText = i
+                }
+
+                marker.captionTextSize = 0.0f
+
 
                 for(i in markerList) {
                     i.setOnClickListener {
                         Log.d("SearchResultActivity", i.tag.toString())
                         infoWindow.open(i)
+                        searchResultActivityViewModel.apply {
+                            bottomTitle.value = i.tag.toString()
+                            bottomAddress.value = i.captionText
+                            bottomMarker.value = i
+                        }
+                        sheet.show(supportFragmentManager, "BottomSheetFragment")
                         true
                     }
                 }
-
                 marker.map = naverMap
-
-//                marker.setOnClickListener {
-//                    Log.d("SearchResultActivity", marker.tag.toString())
-//                    infoWindow.open(marker)
-//                    true
-//                }
             } catch (npe: NullPointerException) {
 
             }

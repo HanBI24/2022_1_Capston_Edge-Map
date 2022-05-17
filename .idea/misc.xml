@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable-v24/ic_star.xml" value="0.21666666666666667" />
+        <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable-v24/ic_star_fill.xml" value="0.21666666666666667" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable/bottom_nav_bg.xml" value="0.21388888888888888" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable/card_bg.xml" value="0.21388888888888888" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/drawable/ic_search.xml" value="0.21388888888888888" />
@@ -12,6 +14,7 @@
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/activity_marker.xml" value="0.1" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/activity_test.xml" value="0.1296875" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/fragment_bookmark.xml" value="0.25364583333333335" />
+        <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.264" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/fragment_direction.xml" value="0.25364583333333335" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/fragment_search.xml" value="0.16" />
         <entry key="..\:/univ_2022_1/2022_capstone/HotPleNavigation/app/src/main/res/layout/fragment_search_result.xml" value="0.25364583333333335" />

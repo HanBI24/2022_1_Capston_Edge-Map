@@ -12,6 +12,7 @@ import com.example.hotplenavigation.repository.GetGeoCodeRepository
 import com.example.hotplenavigation.repository.GetResultPathRepository
 import com.example.hotplenavigation.repository.GetReverseGeoCodeRepository
 import com.example.hotplenavigation.repository.GetSearchResultRepository
+import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -46,6 +47,10 @@ class SearchResultActivityViewModel @Inject constructor(
     private val _geoCodeLatLng = MutableLiveData<Addresse>()
     val getCodeLatLng: LiveData<Addresse>
         get() = _geoCodeLatLng
+
+    val bottomTitle = MutableLiveData<String>()
+    val bottomAddress = MutableLiveData<String>()
+    val bottomMarker = MutableLiveData<Marker>()
 
     fun getResultPath(
         apiKeyId: String,
