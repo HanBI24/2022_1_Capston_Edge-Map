@@ -8,6 +8,7 @@ import com.example.hotplenavigation.data.geo.Addresse
 import com.example.hotplenavigation.data.geo_reverse.Result1
 import com.example.hotplenavigation.data.get_result_path.Traavoidtoll
 import com.example.hotplenavigation.data.search_result.Item
+import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.repository.GetGeoCodeRepository
 import com.example.hotplenavigation.repository.GetResultPathRepository
 import com.example.hotplenavigation.repository.GetReverseGeoCodeRepository
@@ -47,6 +48,12 @@ class SearchResultActivityViewModel @Inject constructor(
     private val _geoCodeLatLng = MutableLiveData<Addresse>()
     val getCodeLatLng: LiveData<Addresse>
         get() = _geoCodeLatLng
+
+    private val data = arrayListOf<BookmarkFragmentEntity>()
+
+    private val _bookmarkData = MutableLiveData<BookmarkFragmentEntity>()
+    val bookmarkData: LiveData<BookmarkFragmentEntity>
+        get() = _bookmarkData
 
     val bottomTitle = MutableLiveData<String>()
     val bottomAddress = MutableLiveData<String>()
@@ -92,5 +99,9 @@ class SearchResultActivityViewModel @Inject constructor(
         query: String
     ) {
         getGeoCodeRepository.makeGetGeoCodeApiCall(apiKeyId, apiKey, query, _geoCodeLatLng)
+    }
+
+    fun addPlace(resultData: BookmarkFragmentEntity) {
+        _bookmarkData.value = resultData
     }
 }

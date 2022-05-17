@@ -13,6 +13,8 @@ import com.example.hotplenavigation.databinding.FragmentBottomSheetBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivityViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
@@ -27,6 +29,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
     private val searchResultActivityViewModel: SearchResultActivityViewModel by activityViewModels()
+    private val bottomSheetFragmentViewModel: BottomSheetFragmentViewModel by activityViewModels()
     private lateinit var naverMap: NaverMap
     private lateinit var marker: Marker
     private lateinit var infoWindow: InfoWindow
@@ -58,7 +61,57 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
             }
         }
 
+        observeData()
+        setClickListenerMethod()
+
         return binding.root
+    }
+
+    private fun setClickListenerMethod() {
+        binding.ivBookmark.setOnClickListener {
+            when (it.tag) {
+                "none" -> {
+                    bottomSheetFragmentViewModel.bookmarkPlace.value?.like = true
+                    searchResultActivityViewModel.bookmarkData.value?.like = true
+                    bottomSheetFragmentViewModel.insertBookmark(searchResultActivityViewModel.bookmarkData.value!!)
+                    binding.ivBookmark.setImageResource(R.drawable.ic_star_fill)
+                    binding.ivBookmark.tag = "set"
+                    Snackbar.make(
+                        binding.mainContainer, "저장되었습니다",
+                        BaseTransientBottomBar.LENGTH_SHORT
+                    ).show()
+                }
+                "set" -> {
+                    bottomSheetFragmentViewModel.bookmarkPlace.value?.like = false
+                    searchResultActivityViewModel.bookmarkData.value?.like = false
+                    bottomSheetFragmentViewModel.deleteByNumber(searchResultActivityViewModel.bookmarkData.value!!.title)
+                    binding.ivBookmark.setImageResource(R.drawable.ic_star)
+                    binding.ivBookmark.tag = "none"
+                    Snackbar.make(
+                        binding.mainContainer, "삭제되었습니다.",
+                        BaseTransientBottomBar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun observeData() {
+        bottomSheetFragmentViewModel.bookmarkPlace.observe(this, {
+            bottomSheetFragmentViewModel.setPlaceInfo(it)
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bottomSheetFragmentViewModel.getAllLikeData().observe(this, { it ->
+            it.iterator().forEach {
+                if (it.title == binding.tvTitle.text.toString()) {
+                    binding.ivBookmark.setImageResource(R.drawable.ic_star_fill)
+                    binding.ivBookmark.tag = "set"
+                }
+            }
+        })
     }
 
     override fun onMapReady(naverMap: NaverMap) {

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
+import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.databinding.FragmentSearchResultBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
@@ -91,6 +92,13 @@ class SearchResultActivity :
                             bottomTitle.value = i.tag.toString()
                             bottomAddress.value = i.captionText
                             bottomMarker.value = i
+                            addPlace(
+                                BookmarkFragmentEntity(
+                                    i.tag.toString(),
+                                    i.captionText,
+                                    false
+                                )
+                            )
                         }
                         sheet.show(supportFragmentManager, "BottomSheetFragment")
                         true
