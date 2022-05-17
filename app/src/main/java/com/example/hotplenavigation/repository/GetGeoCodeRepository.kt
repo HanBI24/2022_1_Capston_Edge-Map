@@ -23,9 +23,8 @@ class GetGeoCodeRepository @Inject constructor(
         val call = getGeoCode.getGeoCode(apiKeyId, apiKey, query)
         call.enqueue(object : Callback<GeoApi> {
             override fun onResponse(call: Call<GeoApi>, response: Response<GeoApi>) {
-                if(response.isSuccessful && response.body() != null) {
+                if (response.isSuccessful && response.body() != null) {
                     getGeoCodeLatLngLiveDataX.postValue(response.body()!!.addresses[0])
-
                 } else {
                     Log.d("SearchResultActivity", response.errorBody()?.string()!!)
                 }
@@ -34,7 +33,6 @@ class GetGeoCodeRepository @Inject constructor(
             override fun onFailure(call: Call<GeoApi>, t: Throwable) {
                 Log.d("SearchResultActivity", t.toString())
             }
-
         })
     }
 }

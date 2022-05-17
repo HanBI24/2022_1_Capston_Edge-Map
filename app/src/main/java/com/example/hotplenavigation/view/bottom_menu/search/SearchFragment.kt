@@ -1,14 +1,10 @@
 package com.example.hotplenavigation.view.bottom_menu.search
 
 import android.content.Intent
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
-import com.example.hotplenavigation.databinding.FragmentBookmarkBinding
 import com.example.hotplenavigation.databinding.FragmentSearchBinding
-import com.example.hotplenavigation.view.MainActivityViewModel
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivity
 import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,9 +18,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
     }
 
     private fun multiSearchViewInit() {
-        binding.multiSearchView.setSearchViewListener(object : MultiSearchView.MultiSearchViewListener{
+        binding.multiSearchView.setSearchViewListener(object : MultiSearchView.MultiSearchViewListener {
             override fun onItemSelected(index: Int, s: CharSequence) {
-
             }
 
             override fun onSearchComplete(index: Int, s: CharSequence) {
@@ -34,11 +29,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
             }
 
             override fun onSearchItemRemoved(index: Int) {
-
             }
 
             override fun onTextChanged(index: Int, s: CharSequence) {
-
             }
         })
     }

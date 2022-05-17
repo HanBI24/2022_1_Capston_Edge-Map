@@ -32,7 +32,7 @@ class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.a
     }
 
     private fun replaceFragment(bnvMenu: String) {
-        when(bnvMenu) {
+        when (bnvMenu) {
             "bnv_search" -> {
                 replaceSearchFragment()
             }

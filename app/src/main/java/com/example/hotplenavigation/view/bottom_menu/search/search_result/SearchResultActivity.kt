@@ -1,9 +1,7 @@
 package com.example.hotplenavigation.view.bottom_menu.search.search_result
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.graphics.Color
-import android.graphics.PointF
 import android.util.Log
 import androidx.activity.viewModels
 import com.example.hotplenavigation.R
@@ -12,17 +10,18 @@ import com.example.hotplenavigation.databinding.FragmentSearchResultBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.CameraAnimation
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.PathOverlay
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.IndexOutOfBoundsException
 
 @AndroidEntryPoint
 class SearchResultActivity :
@@ -74,18 +73,17 @@ class SearchResultActivity :
                     it.x.toDouble()
                 )
 
-                for(i in searchResultTitleList) {
+                for (i in searchResultTitleList) {
                     marker.tag = i
                 }
 
-                for(i in searchResultAddressList) {
+                for (i in searchResultAddressList) {
                     marker.captionText = i
                 }
 
                 marker.captionTextSize = 0.0f
 
-
-                for(i in markerList) {
+                for (i in markerList) {
                     i.setOnClickListener {
                         Log.d("SearchResultActivity", i.tag.toString())
                         infoWindow.open(i)
@@ -100,7 +98,6 @@ class SearchResultActivity :
                 }
                 marker.map = naverMap
             } catch (npe: NullPointerException) {
-
             }
         })
 
@@ -111,7 +108,6 @@ class SearchResultActivity :
             "127.7299707,37.8813153",
             "traavoidtoll"
         )
-
 
         searchResultActivityViewModel.searchResult.observe(this, {
             for (i in it) {
@@ -145,7 +141,7 @@ class SearchResultActivity :
                     10,
                     1,
                     "comment",
-                    regionName2[0]+"맛집"
+                    regionName2[0] + "맛집"
                 )
             }
         })

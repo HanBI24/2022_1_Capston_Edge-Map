@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import coil.load
 import coil.request.CachePolicy
@@ -15,8 +14,11 @@ import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivityViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
+import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +58,6 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
             }
         }
 
-
         return binding.root
     }
 
@@ -79,7 +80,8 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
                     LatLng(
                         searchResultActivityViewModel.bottomMarker.value?.position?.latitude!!,
                         searchResultActivityViewModel.bottomMarker.value?.position?.longitude!!
-                    ), 13.0
+                    ),
+                    13.0
                 )
             )
         )

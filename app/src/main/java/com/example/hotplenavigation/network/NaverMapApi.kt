@@ -1,6 +1,5 @@
 package com.example.hotplenavigation.network
 
-import com.example.hotplenavigation.data.geo.Addresse
 import com.example.hotplenavigation.data.geo.GeoApi
 import com.example.hotplenavigation.data.geo_reverse.ReverseGeoApi
 import com.example.hotplenavigation.data.get_result_path.GetResultPath

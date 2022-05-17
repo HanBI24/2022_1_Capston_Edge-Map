@@ -6,7 +6,6 @@ import androidx.annotation.UiThread
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityMainBinding
-import com.example.hotplenavigation.util.extension.replace
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.BottomMenuActivity
 import com.naver.maps.map.LocationTrackingMode

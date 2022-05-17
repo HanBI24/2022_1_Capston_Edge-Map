@@ -9,6 +9,5 @@ import dagger.hilt.android.AndroidEntryPoint
 class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragment_bookmark) {
 
     override fun initView() {
-
     }
 }
