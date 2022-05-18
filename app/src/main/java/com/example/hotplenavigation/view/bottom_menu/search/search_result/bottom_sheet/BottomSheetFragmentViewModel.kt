@@ -29,7 +29,7 @@ class BottomSheetFragmentViewModel @Inject constructor(
 
     fun deleteByNumber(number: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            bookmarkFragmentRepository.deleteByNumber(number)
+            bookmarkFragmentRepository.deleteByTitle(number)
         }
     }
 
