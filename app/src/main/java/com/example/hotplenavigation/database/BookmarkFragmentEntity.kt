@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "frag_bookmark")
-class BookmarkFragmentEntity (
+class BookmarkFragmentEntity(
     val title: String,
     val address: String,
     var like: Boolean

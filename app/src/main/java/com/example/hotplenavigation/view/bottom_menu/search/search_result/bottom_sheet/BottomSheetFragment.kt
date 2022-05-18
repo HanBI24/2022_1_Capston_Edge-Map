@@ -16,11 +16,11 @@ import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.AndroidEntryPoint
 

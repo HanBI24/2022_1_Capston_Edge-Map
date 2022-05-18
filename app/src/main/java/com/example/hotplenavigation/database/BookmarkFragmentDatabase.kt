@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
 
 @Database(
     entities = [BookmarkFragmentEntity::class],
@@ -19,7 +18,7 @@ abstract class BookmarkFragmentDatabase : RoomDatabase() {
         private var INSTANCE: BookmarkFragmentDatabase? = null
 
         fun getSearchFragmentInstance(context: Context): BookmarkFragmentDatabase {
-            if(INSTANCE == null) {
+            if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
                     BookmarkFragmentDatabase::class.java,

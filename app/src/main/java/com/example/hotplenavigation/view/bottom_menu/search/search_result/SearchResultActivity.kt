@@ -1,6 +1,5 @@
 package com.example.hotplenavigation.view.bottom_menu.search.search_result
 
-import android.app.ProgressDialog
 import android.graphics.Color
 import android.util.Log
 import androidx.activity.viewModels
@@ -11,9 +10,8 @@ import com.example.hotplenavigation.databinding.FragmentSearchResultBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.CameraAnimation
+import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
