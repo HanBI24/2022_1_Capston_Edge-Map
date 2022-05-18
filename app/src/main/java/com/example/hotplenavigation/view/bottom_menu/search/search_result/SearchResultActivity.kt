@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class SearchResultActivity :
@@ -30,27 +31,45 @@ class SearchResultActivity :
     OnMapReadyCallback {
     private val searchResultActivityViewModel: SearchResultActivityViewModel by viewModels()
     private lateinit var naverMap: NaverMap
-    private lateinit var currentCameraPosition: CameraPosition
     private var zoomRatio: Double = 8.0
     private val regionMutableList = mutableSetOf<String>()
     private val searchResultTitleList = mutableSetOf<String>()
     private val searchResultAddressList = mutableSetOf<String>()
-    private val getGeoCodeByTitle = mutableSetOf<String>()
     private val pathGuideX = mutableListOf<Double>()
     private val pathGuideY = mutableListOf<Double>()
-    private lateinit var path: PathOverlay
-    private lateinit var pathContainer: MutableList<LatLng>
-    private var pathGuideSize: Int = 0
-    private lateinit var dialog: ProgressDialog
-    private var isLoaded = false
     private lateinit var infoWindow: InfoWindow
     private lateinit var marker: Marker
     private val markerList = mutableListOf<Marker>()
     private val sheet: BottomSheetFragment by lazy { BottomSheetFragment() }
+    private var LatLngX by Delegates.notNull<Double>()
+    private var LatLngY by Delegates.notNull<Double>()
 
     override fun initView() {
         val word = intent.getStringExtra("search_fragment")
         setNaverMapRender(R.id.map_fragment, supportFragmentManager, this)
+
+        if (word != null) {
+            searchResultActivityViewModel.getInitialGeoApi(
+                "uzlzuhd2pa",
+                "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
+                word
+            )
+        }
+
+        searchResultActivityViewModel.getInitialGeoCode.observe(this, {
+            LatLngY = it.y.toDouble()
+            LatLngX = it.x.toDouble()
+
+            Log.d("SearchFragment", "$LatLngY,$LatLngX")
+
+            searchResultActivityViewModel.getResultPath(
+                "uzlzuhd2pa",
+                "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
+                "127.09431687965,37.513272317072",
+                "$LatLngX,$LatLngY",
+                "traavoidtoll"
+            )
+        })
 
         infoWindow = InfoWindow()
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(this) {
@@ -108,14 +127,6 @@ class SearchResultActivity :
             } catch (npe: NullPointerException) {
             }
         })
-
-        searchResultActivityViewModel.getResultPath(
-            "uzlzuhd2pa",
-            "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
-            "127.09431687965,37.513272317072",
-            "127.7299707,37.8813153",
-            "traavoidtoll"
-        )
 
         searchResultActivityViewModel.searchResult.observe(this, {
             for (i in it) {

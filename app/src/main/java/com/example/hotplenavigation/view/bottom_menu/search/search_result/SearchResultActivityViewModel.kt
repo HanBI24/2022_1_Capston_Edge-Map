@@ -55,6 +55,10 @@ class SearchResultActivityViewModel @Inject constructor(
     val bookmarkData: LiveData<BookmarkFragmentEntity>
         get() = _bookmarkData
 
+    private val _getInitialGeoCode = MutableLiveData<Addresse>()
+    val getInitialGeoCode: LiveData<Addresse>
+        get() = _getInitialGeoCode
+
     val bottomTitle = MutableLiveData<String>()
     val bottomAddress = MutableLiveData<String>()
     val bottomMarker = MutableLiveData<Marker>()
@@ -99,6 +103,14 @@ class SearchResultActivityViewModel @Inject constructor(
         query: String
     ) {
         getGeoCodeRepository.makeGetGeoCodeApiCall(apiKeyId, apiKey, query, _geoCodeLatLng)
+    }
+
+    fun getInitialGeoApi(
+        apiKeyId: String,
+        apiKey: String,
+        query: String
+    ) {
+        getGeoCodeRepository.makeGetGeoCodeApiCall(apiKeyId, apiKey, query, _getInitialGeoCode)
     }
 
     fun addPlace(resultData: BookmarkFragmentEntity) {
