@@ -1,7 +1,11 @@
 package com.example.hotplenavigation.view.bottom_menu.search.search_result
 
+import android.annotation.SuppressLint
 import android.graphics.Color
+import android.location.Location
+import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
@@ -9,14 +13,13 @@ import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.databinding.FragmentSearchResultBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
+import com.google.android.gms.location.*
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraAnimation
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
+import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,10 +44,37 @@ class SearchResultActivity :
     private val sheet: BottomSheetFragment by lazy { BottomSheetFragment() }
     private var LatLngX by Delegates.notNull<Double>()
     private var LatLngY by Delegates.notNull<Double>()
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var currentLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var currentCameraPosition: CameraPosition
 
+    @SuppressLint("MissingPermission")
     override fun initView() {
         val word = intent.getStringExtra("search_fragment")
         setNaverMapRender(R.id.map_fragment, supportFragmentManager, this)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        val locationRequest = LocationRequest.create().apply {
+            interval = 10000
+//            fastestInterval = 50
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            maxWaitTime = 3000
+        }
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(location: LocationResult) {
+                super.onLocationResult(location)
+                currentLocation = location.lastLocation
+            }
+        }
+        Looper.myLooper()?.let {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                it
+            )
+        }
 
         if (word != null) {
             searchResultActivityViewModel.getInitialGeoApi(
@@ -63,7 +93,7 @@ class SearchResultActivity :
             searchResultActivityViewModel.getResultPath(
                 "uzlzuhd2pa",
                 "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
-                "127.09431687965,37.513272317072",
+                "${currentLocation.longitude},${currentLocation.latitude}",
                 "$LatLngX,$LatLngY",
                 "traavoidtoll"
             )
@@ -75,12 +105,6 @@ class SearchResultActivity :
                 return p0.marker?.tag as CharSequence
             }
         }
-
-//        marker.setOnClickListener {
-//            Log.d("SearchResultActivity", marker.tag.toString())
-//            infoWindow.open(marker)
-//            true
-//        }
 
         searchResultActivityViewModel.getCodeLatLng.observe(this, {
             marker = Marker()
@@ -128,9 +152,6 @@ class SearchResultActivity :
 
         searchResultActivityViewModel.searchResult.observe(this, {
             for (i in it) {
-//                marker = Marker()
-//                markerList.add(marker)
-
                 searchResultTitleList.add(i.title)
                 searchResultAddressList.add(i.address)
                 Log.d("SearchResultActivity", searchResultTitleList.toString())
@@ -140,9 +161,7 @@ class SearchResultActivity :
                     "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
                     i.address
                 )
-//                Log.d("SearchResultActivity", i.address)
             }
-//            Log.d("SearchResultActivity", searchResultTitleList.toString())
         })
 
         searchResultActivityViewModel.geoCode.observe(this, {
@@ -163,7 +182,6 @@ class SearchResultActivity :
             }
         })
 
-//         1. 경로 그리기
         searchResultActivityViewModel.getResultPath.observe(this, {
             val path = PathOverlay()
             var routesCount = 0
@@ -222,18 +240,18 @@ class SearchResultActivity :
             infoWindow.close()
         }
 
-//        val locationSource = FusedLocationSource(this, 1000)
-//        naverMap.locationSource = locationSource
-//
-//        val locationOverlay = naverMap.locationOverlay
-//        locationOverlay.isVisible = true
-//
-//        naverMap.locationTrackingMode = LocationTrackingMode.Follow
-//
-//        naverMap.addOnCameraChangeListener { _, _ ->
-//            currentCameraPosition = naverMap.cameraPosition
-//        }
-//
+        val locationSource = FusedLocationSource(this, 1000)
+        naverMap.locationSource = locationSource
+
+        val locationOverlay = naverMap.locationOverlay
+        locationOverlay.isVisible = true
+
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+        naverMap.addOnCameraChangeListener { _, _ ->
+            currentCameraPosition = naverMap.cameraPosition
+        }
+
 //        naverMap.addOnLocationChangeListener { location ->
 //            Toast.makeText(this, "${location.latitude}, ${location.longitude}",
 //                Toast.LENGTH_SHORT).show()
