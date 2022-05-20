@@ -54,9 +54,9 @@ class BookmarkAdapter(
                 memoryCachePolicy(CachePolicy.DISABLED)
             }
 
-//            binding.btnDirection.setOnClickListener {
-//                onClickButton.invoke(bookmarkData)
-//            }
+            binding.btnWeb.setOnClickListener {
+                onClickButton.invoke(bookmarkData)
+            }
             binding.root.setOnClickListener {
                 onClickItem.invoke(bookmarkData)
             }

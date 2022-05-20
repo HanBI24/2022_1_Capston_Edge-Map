@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "216606943397",
+    "project_id": "hotplenavigation",
+    "storage_bucket": "hotplenavigation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216606943397:android:df905edce17e20f481c54c",
+        "android_client_info": {
+          "package_name": "com.example.hotplenavigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216606943397-2fqmu5d7u3gicl2pfl3af1629omo57l7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hotplenavigation",
+            "certificate_hash": "df84757cea92b51ed4e23bbad42c06d5f016bc5b"
+          }
+        },
+        {
+          "client_id": "216606943397-omkgc6nm6d6g5jed3dhds26f8b8g4qar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqpQX3AG1XXi_VKpIu35UT0PXUSwiBRRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216606943397-omkgc6nm6d6g5jed3dhds26f8b8g4qar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

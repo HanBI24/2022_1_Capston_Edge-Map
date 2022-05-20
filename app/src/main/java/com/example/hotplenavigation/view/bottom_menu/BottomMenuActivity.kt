@@ -5,7 +5,6 @@ import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityBottomMenuBinding
 import com.example.hotplenavigation.util.extension.replace
 import com.example.hotplenavigation.view.bottom_menu.bookmark.BookmarkFragment
-import com.example.hotplenavigation.view.bottom_menu.direction.DirectionFragment
 import com.example.hotplenavigation.view.bottom_menu.search.SearchFragment
 import com.example.hotplenavigation.view.bottom_menu.setting.CommFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.activity_bottom_menu) {
     private val searchFragment: SearchFragment by lazy { SearchFragment() }
-    private val directionFragment: DirectionFragment by lazy { DirectionFragment() }
     private val bookmarkFragment: BookmarkFragment by lazy { BookmarkFragment() }
     private val commFragment: CommFragment by lazy { CommFragment() }
 
@@ -53,7 +51,6 @@ class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.a
     }
 
     private fun replaceDirectionFragment() {
-        replace(R.id.container_main, directionFragment)
     }
 
     private fun replaceBookmarkFragment() {

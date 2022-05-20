@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hotplenavigation">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,7 +19,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HotPleNavigation">
+        android:theme="@style/Theme.HotPleNavigation"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="ar2g8doh3e" />
@@ -29,7 +32,11 @@
             android:exported="true" />
         <activity android:name=".view.bottom_menu.search.search_result.SearchResultActivity"
             android:exported="true" />
-        <activity android:name=".view.bottom_menu.search.search_result.set_marker.MarkerActivity"
+        <activity android:name=".view.bottom_menu.direction.DirectionActivity"
+            android:exported="true" />
+        <activity android:name=".view.bottom_menu.setting.CommActivity"
+            android:exported="true" />
+        <activity android:name=".view.bottom_menu.bookmark.webview.WebViewActivity"
             android:exported="true" />
 
         <activity

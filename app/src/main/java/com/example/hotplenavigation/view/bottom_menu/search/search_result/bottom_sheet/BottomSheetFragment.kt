@@ -1,5 +1,6 @@
 package com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.databinding.FragmentBottomSheetBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
+import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewActivity
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivityViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -59,6 +61,12 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
                 transformations(CircleCropTransformation())
                 memoryCachePolicy(CachePolicy.DISABLED)
             }
+        }
+
+        binding.btnWeb.setOnClickListener {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("get_address", searchResultActivityViewModel.bottomAddress.value)
+            startActivity(intent)
         }
 
         observeData()

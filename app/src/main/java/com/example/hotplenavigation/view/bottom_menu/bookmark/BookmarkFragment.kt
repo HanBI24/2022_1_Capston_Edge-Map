@@ -1,5 +1,6 @@
 package com.example.hotplenavigation.view.bottom_menu.bookmark
 
+import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
 import com.example.hotplenavigation.databinding.FragmentBookmarkBinding
+import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewActivity
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -42,9 +44,9 @@ class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragm
 //                sheet.show(activity?.supportFragmentManager!!, "BookmarkFragment")
             },
             onClickButton = {
-//                val intent = Intent(activity, DirectionAttachActivity::class.java)
-//                intent.putExtra("share_address", it.address)
-//                startActivity(intent)
+                val intent = Intent(context, WebViewActivity::class.java)
+                intent.putExtra("get_address", it.address)
+                startActivity(intent)
             }
         )
 
