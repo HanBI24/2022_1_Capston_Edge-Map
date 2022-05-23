@@ -1,12 +1,15 @@
 package com.example.hotplenavigation.di
 
+import com.example.hotplenavigation.network.DuruApi
 import com.example.hotplenavigation.network.NaverMapApi
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.DateFormat
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -20,6 +23,7 @@ object RetrofitModule {
     private const val baseReverseGeoURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/"
     private const val baseSearchResultURL = "https://openapi.naver.com/"
     private const val baseGeoURL = "https://naveropenapi.apigw.ntruss.com/map-geocode/"
+    private const val baseDuruURL = "http://api.visitkorea.or.kr/"
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
@@ -36,6 +40,16 @@ object RetrofitModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class GeoType
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class DuruType
+
+    private val gson = GsonBuilder()
+        .setLenient()
+        .serializeNulls()
+        .setDateFormat("yyyyMMddHHmmss")
+        .create()
 
     @Singleton
     @Provides
@@ -103,5 +117,22 @@ object RetrofitModule {
         Retrofit.Builder()
             .baseUrl(baseGeoURL)
             .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    @Singleton
+    @Provides
+    @DuruType
+    fun provideGetRetroServiceInterfaceDuru(
+        @DuruType retrofit: Retrofit
+    ): DuruApi =
+        retrofit.create(DuruApi::class.java)
+
+    @Singleton
+    @Provides
+    @DuruType
+    fun provideGetRetroInstanceDuru(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(baseDuruURL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 }

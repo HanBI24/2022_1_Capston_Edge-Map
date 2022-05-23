@@ -60,26 +60,32 @@
 
                     <!-- Title, secondary and supporting text -->
                     <TextView
+                        android:id="@+id/tv_title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
                     <TextView
+                        android:id="@+id/tv_line_msg1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="HelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tv_desc1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="HelloHelloHelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -114,26 +120,32 @@
 
                     <!-- Title, secondary and supporting text -->
                     <TextView
+                        android:id="@+id/tv_title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
                     <TextView
+                        android:id="@+id/tv_line_msg2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="HelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tv_desc2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="HelloHelloHelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -167,26 +179,32 @@
 
                     <!-- Title, secondary and supporting text -->
                     <TextView
+                        android:id="@+id/tv_title3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
                     <TextView
+                        android:id="@+id/tv_line_msg3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="HelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tv_desc3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="HelloHelloHelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -220,26 +238,32 @@
 
                     <!-- Title, secondary and supporting text -->
                     <TextView
+                        android:id="@+id/tv_title4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceHeadline6" />
 
                     <TextView
+                        android:id="@+id/tv_line_msg4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="HelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tv_desc4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="HelloHelloHelloHelloHello"
+                        android:text="준비중..."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

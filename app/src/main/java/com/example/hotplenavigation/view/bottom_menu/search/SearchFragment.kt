@@ -8,6 +8,8 @@ import com.example.hotplenavigation.databinding.FragmentSearchBinding
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivity
 import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.IndexOutOfBoundsException
+import java.util.*
 
 // 검색 Fragment
 @AndroidEntryPoint
@@ -16,6 +18,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
 
     override fun initView() {
         multiSearchViewInit()
+        ObserveData()
     }
 
     // 검색 기능: 오픈소스 라이브러리 활용
@@ -37,4 +40,75 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
             }
         })
     }
+
+    private fun ObserveData() {
+        for(i in 0..5) {
+            searchFragmentViewModel.getDuruData(
+                "qcjQXVRmqbxl/++PgL+DmjuHYAoLUDxFVyZcI70vaGOrYXYAWdBmNIEXwuNH7impD0bkwGKhWiX4IRTQB1aPXQ==",
+                Random().nextInt(536) + 1,
+                1,
+                i
+            )
+        }
+
+        searchFragmentViewModel.apply {
+            getDuruData1.observe(this@SearchFragment, {
+                binding.apply {
+                    try {
+                        tvTitle1.text = it[0].response.body.items.item.themeNm
+                        tvLineMsg1.text = it[0].response.body.items.item.linemsg
+                        tvDesc1.text = removeHtmlTag(it[0].response.body.items.item.linemsg)
+                    } catch(idx: IndexOutOfBoundsException) {
+                        tvTitle1.text = "준비중..."
+                        tvLineMsg1.text = "준비중..."
+                        tvDesc1.text = "준비중..."
+                    }
+                }
+            })
+
+            getDuruData2.observe(this@SearchFragment, {
+                binding.apply {
+                    try {
+                        tvTitle2.text = it[1].response.body.items.item.themeNm
+                        tvLineMsg2.text = it[1].response.body.items.item.linemsg
+                        tvDesc2.text = removeHtmlTag(it[1].response.body.items.item.linemsg)
+                    } catch(idx: IndexOutOfBoundsException) {
+                        tvTitle2.text = "준비중..."
+                        tvLineMsg2.text = "준비중..."
+                        tvDesc2.text = "준비중..."
+                    }
+                }
+            })
+
+            getDuruData3.observe(this@SearchFragment, {
+                binding.apply {
+                    try {
+                        tvTitle3.text = it[2].response.body.items.item.themeNm
+                        tvLineMsg3.text = it[2].response.body.items.item.linemsg
+                        tvDesc3.text = removeHtmlTag(it[2].response.body.items.item.linemsg)
+                    } catch (idx: IndexOutOfBoundsException) {
+                        tvTitle3.text = "준비중..."
+                        tvLineMsg3.text = "준비중..."
+                        tvDesc3.text = "준비중..."
+                    }
+                }
+            })
+
+            getDuruData4.observe(this@SearchFragment, {
+                binding.apply {
+                    try {
+                        tvTitle4.text = it[3].response.body.items.item.themeNm
+                        tvLineMsg4.text = it[3].response.body.items.item.linemsg
+                        tvDesc4.text = removeHtmlTag(it[3].response.body.items.item.linemsg)
+                    } catch (idx: IndexOutOfBoundsException) {
+                        tvTitle4.text = "준비중..."
+                        tvLineMsg4.text = "준비중..."
+                        tvDesc4.text = "준비중..."
+                    }
+                }
+            })
+        }
+    }
+
+    private fun removeHtmlTag(desc: String) =  desc.replace("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "")
 }

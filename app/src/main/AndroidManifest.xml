@@ -38,6 +38,8 @@
             android:exported="true" />
         <activity android:name=".view.bottom_menu.bookmark.webview.WebViewActivity"
             android:exported="true" />
+        <activity android:name=".view.bottom_menu.search.recommend.RecommendActivity"
+            android:exported="true" />
 
         <activity
             android:name=".view.MainActivity"
