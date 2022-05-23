@@ -27,7 +27,7 @@
                     android:id="@+id/iv_thumb"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/ic_warning" />
             </LinearLayout>
 
             <LinearLayout
