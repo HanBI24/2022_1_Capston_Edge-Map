@@ -1,11 +1,14 @@
 package com.example.hotplenavigation.view.bottom_menu.search
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
 import com.example.hotplenavigation.databinding.FragmentSearchBinding
+import com.example.hotplenavigation.view.bottom_menu.search.bottom_sheet.SearchBottomSheetFragment
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivity
+import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IndexOutOfBoundsException
@@ -15,10 +18,12 @@ import java.util.*
 @AndroidEntryPoint
 class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchFragmentViewModel: SearchFragmentViewModel by activityViewModels()
+    private val sheet: SearchBottomSheetFragment by lazy { SearchBottomSheetFragment() }
 
     override fun initView() {
         multiSearchViewInit()
-        ObserveData()
+        observeData()
+        onClickListener()
     }
 
     // 검색 기능: 오픈소스 라이브러리 활용
@@ -41,7 +46,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
         })
     }
 
-    private fun ObserveData() {
+    private fun observeData() {
         for(i in 0..5) {
             searchFragmentViewModel.getDuruData(
                 "qcjQXVRmqbxl/++PgL+DmjuHYAoLUDxFVyZcI70vaGOrYXYAWdBmNIEXwuNH7impD0bkwGKhWiX4IRTQB1aPXQ==",
@@ -107,6 +112,27 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     }
                 }
             })
+        }
+    }
+
+    private fun onClickListener() {
+        binding.apply {
+            container1.setOnClickListener {
+                searchFragmentViewModel.getNumber.value = 1
+                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+            }
+            container2.setOnClickListener {
+                searchFragmentViewModel.getNumber.value = 2
+                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+            }
+            container3.setOnClickListener {
+                searchFragmentViewModel.getNumber.value = 3
+                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+            }
+            container4.setOnClickListener {
+                searchFragmentViewModel.getNumber.value = 4
+                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+            }
         }
     }
 

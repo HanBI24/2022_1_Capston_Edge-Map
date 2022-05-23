@@ -30,6 +30,10 @@ class SearchFragmentViewModel @Inject constructor(
     val getDuruData4: LiveData<List<Duru>>
         get() = _getDuruData4
 
+    private val _getNumber = MutableLiveData<Int>()
+    val getNumber: MutableLiveData<Int>
+        get() = _getNumber
+
     fun getDuruData(
         serviceKey: String,
         pageNo: Int,
@@ -50,6 +54,5 @@ class SearchFragmentViewModel @Inject constructor(
                 getDuruRepository.makeGetDuruData(serviceKey, pageNo, numOfRows, _getDuruData4)
             }
         }
-
     }
 }
