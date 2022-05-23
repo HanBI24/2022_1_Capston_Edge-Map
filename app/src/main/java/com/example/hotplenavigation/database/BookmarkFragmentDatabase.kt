@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+// Room DB를 사용하기 위한 Database 클래스 작성
 @Database(
     entities = [BookmarkFragmentEntity::class],
     version = 2,

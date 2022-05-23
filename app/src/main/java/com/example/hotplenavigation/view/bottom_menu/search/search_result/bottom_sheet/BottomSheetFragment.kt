@@ -26,6 +26,7 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.AndroidEntryPoint
 
+// 검색 결과 화면에서 사용자가 누른 마커의 정보를 출력해주는 Fragment
 @AndroidEntryPoint
 class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
     private var _binding: FragmentBottomSheetBinding? = null
@@ -45,14 +46,18 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
         setNaverMapRender(R.id.container_map_temp, childFragmentManager, this)
 
+        // 마커 추가
         marker = Marker()
+        // 태그 설정
         marker.tag = searchResultActivityViewModel.bottomTitle.value
+        // 위치 설정
         marker.position = LatLng(
             searchResultActivityViewModel.bottomMarker.value?.position?.latitude!!,
             searchResultActivityViewModel.bottomMarker.value?.position?.longitude!!
         )
 
         binding.apply {
+            // 해당 위치의 이름과 주소 및 사진 출력
             tvTitle.text = searchResultActivityViewModel.bottomTitle.value
             tvAddress.text = searchResultActivityViewModel.bottomAddress.value
             ivThumb.load("https://picsum.photos/200/300") {
@@ -63,6 +68,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
             }
         }
 
+        // 버튼을 누르면 WebView Activity 호출
         binding.btnWeb.setOnClickListener {
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("get_address", searchResultActivityViewModel.bottomAddress.value)
@@ -76,6 +82,8 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
     }
 
     private fun setClickListenerMethod() {
+        // 별 표시를 누르면 즐겨찾기에 추가 및 Local DB에 저장
+        // (Local DB, Android Jetpack Room Library)
         binding.ivBookmark.setOnClickListener {
             when (it.tag) {
                 "none" -> {
@@ -92,7 +100,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
                 "set" -> {
                     bottomSheetFragmentViewModel.bookmarkPlace.value?.like = false
                     searchResultActivityViewModel.bookmarkData.value?.like = false
-                    bottomSheetFragmentViewModel.deleteByNumber(searchResultActivityViewModel.bookmarkData.value!!.title)
+                    bottomSheetFragmentViewModel.deleteByTitle(searchResultActivityViewModel.bookmarkData.value!!.title)
                     binding.ivBookmark.setImageResource(R.drawable.ic_star)
                     binding.ivBookmark.tag = "none"
                     Snackbar.make(
@@ -105,6 +113,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
     }
 
     private fun observeData() {
+        // 즐겨찾기 목록이 추가되면 해당 정보를 LiveData에 저장
         bottomSheetFragmentViewModel.bookmarkPlace.observe(this, {
             bottomSheetFragmentViewModel.setPlaceInfo(it)
         })
@@ -112,6 +121,8 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
+        // 해당 Fragment가 시작하면 Local DB에 저장되어있는 좋아요를 기준으로
+        // DB에 저장되어있는 해당 리스트 출력
         bottomSheetFragmentViewModel.getAllLikeData().observe(this, { it ->
             it.iterator().forEach {
                 if (it.title == binding.tvTitle.text.toString()) {
@@ -127,6 +138,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
         marker.map = naverMap
         infoWindow = InfoWindow()
 
+        // 마커 정보 창
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(context!!) {
             override fun getText(p0: InfoWindow): CharSequence {
                 return p0.marker?.tag as CharSequence
@@ -135,6 +147,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
         infoWindow.open(marker)
 
+        // 사용자에게 보여지는 네이버 맵 위치 이동 (이전 화면에서 선택한 마커 위치로)
         naverMap.moveCamera(
             CameraUpdate.toCameraPosition(
                 CameraPosition(

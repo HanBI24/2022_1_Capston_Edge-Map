@@ -11,6 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+// API 호출을 통한 검색 결과 응답 데이터 받아오는 Repository (Retrofit Open Library 사용)
 class GetSearchResultRepository @Inject constructor(
     @RetrofitModule.SearchResultType private val searchResult: NaverMapApi
 ) {

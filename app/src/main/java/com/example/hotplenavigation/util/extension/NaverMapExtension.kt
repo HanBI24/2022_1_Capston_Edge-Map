@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.OnMapReadyCallback
 
+// Naver Map을 보일러 플레이트 코드 없이, 더욱 간단하게 사용하기 위한 확장 파일
 fun AppCompatActivity.setNaverMapRender(
     @IdRes containerId: Int,
     supportFragmentManager: FragmentManager,

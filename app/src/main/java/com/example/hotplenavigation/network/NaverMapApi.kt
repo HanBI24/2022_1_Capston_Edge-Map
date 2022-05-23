@@ -9,8 +9,10 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
+// Naver Map API 호출을 위한 interface
 interface NaverMapApi {
 
+    // 경로 얻어오기
     @GET("v1/driving")
     fun getResultPath(
         @Header("X-NCP-APIGW-API-KEY-ID") apiKeyID: String,
@@ -20,6 +22,7 @@ interface NaverMapApi {
         @Query("option") option: String,
     ): Call<GetResultPath>
 
+    // 위도, 경도 값을 실 주소로 얻어오기
     @GET("v2/gc")
     fun getReverseGeo(
         @Header("X-NCP-APIGW-API-KEY-ID") apiKeyId: String,
@@ -29,6 +32,7 @@ interface NaverMapApi {
         @Query("orders") orders: String = "addr"
     ): Call<ReverseGeoApi>
 
+    // 검색 결과 얻어오기
     @GET("v1/search/local.json")
     fun getSearchResult(
         @Header("X-Naver-Client-Id") apiKeyId: String,
@@ -39,6 +43,7 @@ interface NaverMapApi {
         @Query("query") query: String
     ): Call<SearchResultData>
 
+    // 실 주소를 위도, 경도 값으로 얻어오기
     @GET("v2/geocode")
     fun getGeoCode(
         @Header("X-NCP-APIGW-API-KEY-ID") apiKeyId: String,

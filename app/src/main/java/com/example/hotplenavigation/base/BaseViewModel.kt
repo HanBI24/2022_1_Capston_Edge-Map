@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
+// ViewModel의 보일러 플레이트 코드를 줄이기 위한 클래스
 // RxJava Observing (Prevent Memory Leak)
 open class BaseViewModel : ViewModel() {
     private val compositeDisposable = CompositeDisposable()

@@ -15,6 +15,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.PathOverlay
 import dagger.hilt.android.AndroidEntryPoint
 
+// API 및 여러 기능을 테스트 하기 위한 테스트 액티비티
 @AndroidEntryPoint
 class TestActivity :
     BindingActivity<ActivityTestBinding>(R.layout.activity_test),

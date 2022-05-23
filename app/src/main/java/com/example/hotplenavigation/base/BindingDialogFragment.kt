@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.hotplenavigation.util.PixelRatio
 import javax.inject.Inject
 
+// Dialog Fragment의 보일러 플레이트 코드를 줄이기 위한 클래스
 abstract class BindingDialogFragment<T : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int
 ) : DialogFragment() {

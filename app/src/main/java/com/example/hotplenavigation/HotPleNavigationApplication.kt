@@ -6,6 +6,8 @@ import com.example.hotplenavigation.util.PixelRatio
 import com.example.hotplenavigation.util.PreferenceUtil
 import dagger.hilt.android.HiltAndroidApp
 
+// 상위 계층에서 Context를 얻어오기 위해 사용하는 Application Class
+// DI, Extension에서 많ㄴ이 사용
 @HiltAndroidApp
 class HotPleNavigationApplication : Application() {
 

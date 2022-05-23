@@ -9,6 +9,7 @@ import com.example.hotplenavigation.view.bottom_menu.search.search_result.Search
 import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
 
+// 검색 Fragment
 @AndroidEntryPoint
 class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchFragmentViewModel: SearchFragmentViewModel by activityViewModels()
@@ -17,6 +18,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
         multiSearchViewInit()
     }
 
+    // 검색 기능: 오픈소스 라이브러리 활용
     private fun multiSearchViewInit() {
         binding.multiSearchView.setSearchViewListener(object : MultiSearchView.MultiSearchViewListener {
             override fun onItemSelected(index: Int, s: CharSequence) {

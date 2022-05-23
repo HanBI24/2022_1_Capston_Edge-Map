@@ -11,6 +11,7 @@ import retrofit2.Response
 import java.lang.IndexOutOfBoundsException
 import javax.inject.Inject
 
+// API 호출을 통한 위도, 경도를 실 주소르 바꾸는 결과 응답 데이터 받아오는 Repository (Retrofit Open Library 사용)
 class GetReverseGeoCodeRepository @Inject constructor(
     @RetrofitModule.ReverseGeoType private val naverMapApiReverseGeo: NaverMapApi
 ) {

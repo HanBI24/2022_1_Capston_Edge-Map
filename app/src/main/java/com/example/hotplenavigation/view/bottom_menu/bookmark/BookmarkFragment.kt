@@ -15,34 +15,39 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
+// 즐겨찾기 Fragment (Local DB: Android Jetpack Room Library)
 @AndroidEntryPoint
 class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragment_bookmark) {
     private val bookmarkViewModel: BookmarkFragmentViewModel by activityViewModels()
     private val linearLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(activity) }
-    private val sheet: BottomSheetFragment by lazy { BottomSheetFragment() }
     private lateinit var bookmarkAdapter: BookmarkAdapter
 
     override fun initView() {
         initRecyclerView()
 
+        // 모든 데이터를 가져오고, Recycler View List에 추가
         bookmarkViewModel.getAllData().observe(this, {
             bookmarkAdapter.setData(it)
         })
     }
 
     private fun initRecyclerView() {
+        // 레이아웃 매니저 설정
         linearLayoutManager.apply {
             reverseLayout = true
             stackFromEnd = true
         }
+        // 기준선 그리기
         val decoration = DividerItemDecoration(activity, linearLayoutManager.orientation)
 
+        // 해당 RecyclerView Adapter 설정
         bookmarkAdapter = BookmarkAdapter(
             emptyList(),
             onClickItem = {
 //                searchResultViewModel.touchItem(it)
 //                sheet.show(activity?.supportFragmentManager!!, "BookmarkFragment")
             },
+            // 버튼 클릭 시 해당 장소의 정보를 표시하는 웹뷰 Activity 이동
             onClickButton = {
                 val intent = Intent(context, WebViewActivity::class.java)
                 intent.putExtra("get_address", it.address)
@@ -50,12 +55,14 @@ class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragm
             }
         )
 
+        // RecyclerView 설정
         binding.rvBookmark.apply {
             layoutManager = linearLayoutManager
             adapter = bookmarkAdapter
             addItemDecoration(decoration)
         }
 
+        // 오른쪽으로 스와이프 시 즐겨찾기 목록 및 Local DB에서 삭제
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,

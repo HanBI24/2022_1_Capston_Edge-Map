@@ -9,6 +9,7 @@ import com.example.hotplenavigation.view.bottom_menu.search.SearchFragment
 import com.example.hotplenavigation.view.bottom_menu.setting.CommFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+// Fragment 전환 액티비티
 @AndroidEntryPoint
 class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.activity_bottom_menu) {
     private val searchFragment: SearchFragment by lazy { SearchFragment() }
@@ -46,6 +47,7 @@ class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.a
         }
     }
 
+    // Fragment 전환
     private fun replaceSearchFragment() {
         replace(R.id.container_main, searchFragment)
     }
