@@ -20,6 +20,5 @@ class WebViewActivity : BindingActivity<ActivityWebBinding>(R.layout.activity_we
             webViewClient = WebViewClient()
             loadUrl("https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=$address")
         }
-
     }
 }

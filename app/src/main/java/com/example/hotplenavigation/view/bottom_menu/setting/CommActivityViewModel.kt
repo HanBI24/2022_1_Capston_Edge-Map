@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hotplenavigation.util.LoginState
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +14,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CommActivityViewModel @Inject constructor(
-
-) : ViewModel() {
+class CommActivityViewModel @Inject constructor() : ViewModel() {
 
     private var _loginStateLiveData = MutableLiveData<LoginState>(LoginState.UnInitialized)
     val loginStateLiveData: LiveData<LoginState> = _loginStateLiveData

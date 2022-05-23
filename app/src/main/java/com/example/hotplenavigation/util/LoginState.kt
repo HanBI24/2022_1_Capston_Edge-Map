@@ -13,13 +13,12 @@ sealed class LoginState {
     ) : LoginState()
 
     sealed class Success : LoginState() {
-        data class Registered(  //Google Auth 등록된 상태
+        data class Registered( // Google Auth 등록된 상태
             val userName: String,
             val profileImgeUri: Uri,
         ) : Success()
-        object NotRegistered : Success()  //Google Auth 미등록된 상태
+        object NotRegistered : Success() // Google Auth 미등록된 상태
     }
 
     object Error : LoginState()
-
 }
