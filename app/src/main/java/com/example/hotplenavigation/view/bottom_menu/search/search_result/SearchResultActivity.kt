@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.location.Location
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
@@ -28,6 +29,7 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,6 +63,8 @@ class SearchResultActivity :
     @SuppressLint("MissingPermission")
     override fun initView() {
         val word = intent.getStringExtra("search_fragment")
+        val searchWord = intent.getStringExtra("search_word_fragment")
+        Toast.makeText(this, word+searchWord, Toast.LENGTH_SHORT).show()
         setNaverMapRender(R.id.map_fragment, supportFragmentManager, this)
 
         // 현재 위치 찾기
@@ -126,6 +130,8 @@ class SearchResultActivity :
         searchResultActivityViewModel.getCodeLatLng.observe(this, {
             // 마커 객체 생성 및 리스트에 추가
             marker = Marker()
+            marker.icon = MarkerIcons.BLACK
+            marker.iconTintColor = Color.parseColor("#DC5180")
             markerList.add(marker)
             try {
                 // 마커 위치 설정
@@ -213,7 +219,7 @@ class SearchResultActivity :
                     10,
                     1,
                     "comment",
-                    regionName2[0] + "맛집"
+                    regionName2[0] + searchWord
                 )
             }
         })

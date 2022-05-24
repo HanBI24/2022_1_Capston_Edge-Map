@@ -16,6 +16,7 @@ import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewAct
 import com.example.hotplenavigation.view.bottom_menu.search.SearchFragmentViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class SearchBottomSheetFragment : BottomDrawerFragment() {
@@ -30,6 +31,39 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
     ): View {
         _binding = FragmentSearchBottomSheetBinding.inflate(inflater, container, false)
 
+        when(Random().nextInt(5) + 1) {
+            1 -> binding.ivThumb.load(R.drawable.pic1) {
+                crossfade(true)
+                placeholder(R.drawable.ic_launcher_foreground)
+                transformations(CircleCropTransformation())
+                memoryCachePolicy(CachePolicy.DISABLED)
+            }
+            2 -> binding.ivThumb.load(R.drawable.pic2) {
+                crossfade(true)
+                placeholder(R.drawable.ic_launcher_foreground)
+                transformations(CircleCropTransformation())
+                memoryCachePolicy(CachePolicy.DISABLED)
+            }
+            3 -> binding.ivThumb.load(R.drawable.pic3) {
+                crossfade(true)
+                placeholder(R.drawable.ic_launcher_foreground)
+                transformations(CircleCropTransformation())
+                memoryCachePolicy(CachePolicy.DISABLED)
+            }
+            4 -> binding.ivThumb.load(R.drawable.pic4) {
+                crossfade(true)
+                placeholder(R.drawable.ic_launcher_foreground)
+                transformations(CircleCropTransformation())
+                memoryCachePolicy(CachePolicy.DISABLED)
+            }
+            5 -> binding.ivThumb.load(R.drawable.pic5) {
+                crossfade(true)
+                placeholder(R.drawable.ic_launcher_foreground)
+                transformations(CircleCropTransformation())
+                memoryCachePolicy(CachePolicy.DISABLED)
+            }
+        }
+
         initTextView()
 
         return binding.root
@@ -41,7 +75,8 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
                 1 -> {
                     tvTitle.text = searchFragmentViewModel.getDuruData1.value?.get(0)?.response?.body?.items?.item?.themeNm!!
                     tvLineMsg.text = searchFragmentViewModel.getDuruData1.value?.get(0)?.response?.body?.items?.item?.linemsg!!
-                    tvDesc.text = removeHtmlTag(searchFragmentViewModel.getDuruData1.value?.get(0)?.response?.body?.items?.item?.themedesc!!)
+                    val desc = removeHtmlTag(searchFragmentViewModel.getDuruData1.value?.get(0)?.response?.body?.items?.item?.themedesc!!)
+                    tvDesc.text = desc
                 }
                 2 -> {
                     tvTitle.text = searchFragmentViewModel.getDuruData1.value?.get(1)?.response?.body?.items?.item?.themeNm!!
@@ -60,14 +95,7 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
                 }
             }
 
-            ivThumb.load("https://picsum.photos/200/300") {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
-            }
-
-            btnWeb.setOnClickListener {
+            tvMore.setOnClickListener {
                 val intent = Intent(context, WebViewActivity::class.java)
                 intent.putExtra("get_recommend_title", tvTitle.text)
                 startActivity(intent)
@@ -75,5 +103,8 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
         }
     }
 
-    private fun removeHtmlTag(desc: String) = desc.replace("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "")
+    private fun removeHtmlTag(desc: String): String {
+        val replaceRegex = "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>".toRegex()
+        return desc.replace(replaceRegex, "")
+    }
 }

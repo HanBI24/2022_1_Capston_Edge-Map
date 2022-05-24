@@ -1,17 +1,22 @@
 package com.example.hotplenavigation.view.bottom_menu.search
 
+import android.app.Activity
 import android.content.Intent
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import coil.load
 import coil.request.CachePolicy
-import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
 import com.example.hotplenavigation.databinding.FragmentSearchBinding
 import com.example.hotplenavigation.view.bottom_menu.search.bottom_sheet.SearchBottomSheetFragment
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivity
-import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IndexOutOfBoundsException
@@ -22,35 +27,38 @@ import java.util.*
 class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchFragmentViewModel: SearchFragmentViewModel by activityViewModels()
     private val sheet: SearchBottomSheetFragment by lazy { SearchBottomSheetFragment() }
+    private var searchWord: String = "맛집"
 
     override fun initView() {
-        multiSearchViewInit()
+        binding.rg.setOnCheckedChangeListener { radioGroup, checkId ->
+            when(checkId) {
+                R.id.rd_food -> searchWord = "맛집"
+                R.id.rd_fame -> searchWord = "관광지"
+                R.id.rd_sleep -> searchWord = "숙박"
+            }
+        }
+
+        initSearchView()
         observeData()
         onClickListener()
     }
 
-    // 검색 기능: 오픈소스 라이브러리 활용
-    private fun multiSearchViewInit() {
-        binding.multiSearchView.setSearchViewListener(object : MultiSearchView.MultiSearchViewListener {
-            override fun onItemSelected(index: Int, s: CharSequence) {
-            }
-
-            override fun onSearchComplete(index: Int, s: CharSequence) {
+    private fun initSearchView() {
+        binding.etSearch.setOnEditorActionListener { textView, actionId, _ ->
+            var handle = false;
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val intent = Intent(context, SearchResultActivity::class.java)
-                intent.putExtra("search_fragment", s.toString())
+                intent.putExtra("search_fragment", textView.text.toString())
+                intent.putExtra("search_word_fragment", searchWord)
                 startActivity(intent)
+                handle = true
             }
-
-            override fun onSearchItemRemoved(index: Int) {
-            }
-
-            override fun onTextChanged(index: Int, s: CharSequence) {
-            }
-        })
+            handle
+        }
     }
 
     private fun observeData() {
-        for(i in 0..5) {
+        for (i in 0..5) {
             searchFragmentViewModel.getDuruData(
                 "qcjQXVRmqbxl/++PgL+DmjuHYAoLUDxFVyZcI70vaGOrYXYAWdBmNIEXwuNH7impD0bkwGKhWiX4IRTQB1aPXQ==",
                 Random().nextInt(536) + 1,
@@ -65,17 +73,18 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle1.text = it[0].response.body.items.item.themeNm
                         tvLineMsg1.text = it[0].response.body.items.item.linemsg
-                        tvDesc1.text = removeHtmlTag(it[0].response.body.items.item.linemsg)
-                        iv1.load("https://picsum.photos/200/300") {
-                            crossfade(true)
-                            placeholder(R.drawable.ic_warning)
-                            memoryCachePolicy(CachePolicy.DISABLED)
-                        }
-                    } catch(idx: IndexOutOfBoundsException) {
+//                        tvDesc1.text = removeHtmlTag(it[0].response.body.items.item.themedesc)
+//                        iv1.load("https://picsum.photos/200/300") {
+//                            crossfade(true)
+//                            placeholder(R.drawable.ic_warning)
+//                            memoryCachePolicy(CachePolicy.DISABLED)
+//                        }
+                    } catch (idx: IndexOutOfBoundsException) {
                         tvTitle1.text = "준비중..."
                         tvLineMsg1.text = "준비중..."
-                        tvDesc1.text = "준비중..."
+//                        tvDesc1.text = "준비중..."
                     }
+                    iv1.clipToOutline = true
                 }
             })
 
@@ -84,16 +93,16 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle2.text = it[1].response.body.items.item.themeNm
                         tvLineMsg2.text = it[1].response.body.items.item.linemsg
-                        tvDesc2.text = removeHtmlTag(it[1].response.body.items.item.linemsg)
-                        iv2.load("https://picsum.photos/200/300") {
-                            crossfade(true)
-                            placeholder(R.drawable.ic_warning)
-                            memoryCachePolicy(CachePolicy.DISABLED)
-                        }
-                    } catch(idx: IndexOutOfBoundsException) {
+//                        tvDesc2.text = removeHtmlTag(it[1].response.body.items.item.themedesc)
+//                        iv2.load("https://picsum.photos/200/300") {
+//                            crossfade(true)
+//                            placeholder(R.drawable.ic_warning)
+//                            memoryCachePolicy(CachePolicy.DISABLED)
+//                        }
+                    } catch (idx: IndexOutOfBoundsException) {
                         tvTitle2.text = "준비중..."
                         tvLineMsg2.text = "준비중..."
-                        tvDesc2.text = "준비중..."
+//                        tvDesc2.text = "준비중..."
                     }
                 }
             })
@@ -103,16 +112,16 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle3.text = it[2].response.body.items.item.themeNm
                         tvLineMsg3.text = it[2].response.body.items.item.linemsg
-                        tvDesc3.text = removeHtmlTag(it[2].response.body.items.item.linemsg)
-                        iv3.load("https://picsum.photos/200/300") {
-                            crossfade(true)
-                            placeholder(R.drawable.ic_warning)
-                            memoryCachePolicy(CachePolicy.DISABLED)
-                        }
+//                        tvDesc3.text = removeHtmlTag(it[2].response.body.items.item.themedesc)
+//                        iv3.load("https://picsum.photos/200/300") {
+////                            crossfade(true)
+////                            placeholder(R.drawable.ic_warning)
+////                            memoryCachePolicy(CachePolicy.DISABLED)
+//                        }
                     } catch (idx: IndexOutOfBoundsException) {
                         tvTitle3.text = "준비중..."
                         tvLineMsg3.text = "준비중..."
-                        tvDesc3.text = "준비중..."
+//                        tvDesc3.text = "준비중..."
                     }
                 }
             })
@@ -122,16 +131,16 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle4.text = it[3].response.body.items.item.themeNm
                         tvLineMsg4.text = it[3].response.body.items.item.linemsg
-                        tvDesc4.text = removeHtmlTag(it[3].response.body.items.item.linemsg)
-                        iv4.load("https://picsum.photos/200/300") {
-                            crossfade(true)
-                            placeholder(R.drawable.ic_warning)
-                            memoryCachePolicy(CachePolicy.DISABLED)
-                        }
+//                        tvDesc4.text = removeHtmlTag(it[3].response.body.items.item.themedesc)
+//                        iv4.load("https://picsum.photos/200/300") {
+//                            crossfade(true)
+//                            placeholder(R.drawable.ic_warning)
+//                            memoryCachePolicy(CachePolicy.DISABLED)
+//                        }
                     } catch (idx: IndexOutOfBoundsException) {
                         tvTitle4.text = "준비중..."
                         tvLineMsg4.text = "준비중..."
-                        tvDesc4.text = "준비중..."
+//                        tvDesc4.text = "준비중..."
                     }
                 }
             })
@@ -159,5 +168,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
         }
     }
 
-    private fun removeHtmlTag(desc: String) =  desc.replace("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "")
+    private fun removeHtmlTag(desc: String): String {
+        val replaceRegex = "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>".toRegex()
+        return desc.replace(replaceRegex, "")
+    }
 }

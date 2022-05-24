@@ -38,23 +38,23 @@ class MainActivity :
                     startActivity(intent)
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.bottom_menu_direction -> {
-                    intent.putExtra("bottom_nav", "bnv_direction")
-                    startActivity(intent)
-                    return@setOnNavigationItemSelectedListener true
-                }
+//                R.id.bottom_menu_direction -> {
+//                    intent.putExtra("bottom_nav", "bnv_direction")
+//                    startActivity(intent)
+//                    return@setOnNavigationItemSelectedListener true
+//                }
                 R.id.bottom_menu_bookmark -> {
                     intent.putExtra("bottom_nav", "bnv_bookmark")
                     startActivity(intent)
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.bottom_menu_setting -> {
-//                    intent.putExtra("bottom_nav", "bnv_setting")
-//                    startActivity(intent)
-                    val commIntent = Intent(this@MainActivity, CommActivity::class.java)
-                    startActivity(commIntent)
-                    return@setOnNavigationItemSelectedListener true
-                }
+//                R.id.bottom_menu_setting -> {
+////                    intent.putExtra("bottom_nav", "bnv_setting")
+////                    startActivity(intent)
+//                    val commIntent = Intent(this@MainActivity, CommActivity::class.java)
+//                    startActivity(commIntent)
+//                    return@setOnNavigationItemSelectedListener true
+//                }
             }
             false
         }

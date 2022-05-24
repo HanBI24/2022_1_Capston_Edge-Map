@@ -1,6 +1,7 @@
 package com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,9 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 // 검색 결과 화면에서 사용자가 누른 마커의 정보를 출력해주는 Fragment
 @AndroidEntryPoint
@@ -46,10 +49,21 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
         setNaverMapRender(R.id.container_map_temp, childFragmentManager, this)
 
+        when(Random().nextInt(5) + 1) {
+            1 -> binding.ivThumb.load(R.drawable.pic1)
+            2 -> binding.ivThumb.load(R.drawable.pic2)
+            3 -> binding.ivThumb.load(R.drawable.pic3)
+            4 -> binding.ivThumb.load(R.drawable.pic4)
+            5 -> binding.ivThumb.load(R.drawable.pic5)
+        }
+
         // 마커 추가
         marker = Marker()
+        // 마커 색 설정
+        marker.icon = MarkerIcons.BLACK
+        marker.iconTintColor = Color.parseColor("#DC5180")
         // 태그 설정
-        marker.tag = searchResultActivityViewModel.bottomTitle.value
+        marker.tag = "더 많은 정보를 보려면 마커를 터치하세요."
         // 위치 설정
         marker.position = LatLng(
             searchResultActivityViewModel.bottomMarker.value?.position?.latitude!!,
@@ -66,13 +80,6 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
                 transformations(CircleCropTransformation())
                 memoryCachePolicy(CachePolicy.DISABLED)
             }
-        }
-
-        // 버튼을 누르면 WebView Activity 호출
-        binding.btnWeb.setOnClickListener {
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra("get_address", searchResultActivityViewModel.bottomAddress.value)
-            startActivity(intent)
         }
 
         observeData()
@@ -159,5 +166,12 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
                 )
             )
         )
+
+        marker.setOnClickListener {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("get_address", searchResultActivityViewModel.bottomAddress.value)
+            startActivity(intent)
+            true
+        }
     }
 }

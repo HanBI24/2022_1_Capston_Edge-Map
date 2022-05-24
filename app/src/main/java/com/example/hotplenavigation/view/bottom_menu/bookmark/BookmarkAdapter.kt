@@ -53,17 +53,17 @@ class BookmarkAdapter(
             // 이름 및 주소, 사진 설정
             binding.tvPlace.text = bookmarkData.title
             binding.tvAddress.text = bookmarkData.address
-            binding.ivThumb.load("https://picsum.photos/200/300") {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
-            }
+//            binding.ivThumb.load("https://picsum.photos/200/300") {
+//                crossfade(true)
+//                placeholder(R.drawable.ic_launcher_foreground)
+//                transformations(CircleCropTransformation())
+//                memoryCachePolicy(CachePolicy.DISABLED)
+//            }
 
             // 버튼 클릭 이벤트
-            binding.btnWeb.setOnClickListener {
-                onClickButton.invoke(bookmarkData)
-            }
+//            binding.btnWeb.setOnClickListener {
+//                onClickButton.invoke(bookmarkData)
+//            }
             binding.root.setOnClickListener {
                 onClickItem.invoke(bookmarkData)
             }

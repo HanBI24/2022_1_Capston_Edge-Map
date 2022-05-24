@@ -46,12 +46,13 @@ class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragm
             onClickItem = {
 //                searchResultViewModel.touchItem(it)
 //                sheet.show(activity?.supportFragmentManager!!, "BookmarkFragment")
-            },
-            // 버튼 클릭 시 해당 장소의 정보를 표시하는 웹뷰 Activity 이동
-            onClickButton = {
                 val intent = Intent(context, WebViewActivity::class.java)
                 intent.putExtra("get_address", it.address)
                 startActivity(intent)
+            },
+            // 버튼 클릭 시 해당 장소의 정보를 표시하는 웹뷰 Activity 이동
+            onClickButton = {
+
             }
         )
 
