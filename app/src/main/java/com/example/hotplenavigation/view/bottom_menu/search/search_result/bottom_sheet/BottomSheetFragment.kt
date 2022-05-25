@@ -12,8 +12,11 @@ import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.databinding.FragmentBottomSheetBinding
+import com.example.hotplenavigation.util.extension.makeToast
+import com.example.hotplenavigation.util.extension.removeHtmlTag
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewActivity
+import com.example.hotplenavigation.view.bottom_menu.search.SearchFragmentViewModel
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivityViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -27,13 +30,13 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 // 검색 결과 화면에서 사용자가 누른 마커의 정보를 출력해주는 Fragment
 @AndroidEntryPoint
 class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
+    private val searchFragmentViewModel: SearchFragmentViewModel by activityViewModels()
     private val searchResultActivityViewModel: SearchResultActivityViewModel by activityViewModels()
     private val bottomSheetFragmentViewModel: BottomSheetFragmentViewModel by activityViewModels()
     private lateinit var naverMap: NaverMap
@@ -49,12 +52,10 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
         setNaverMapRender(R.id.container_map_temp, childFragmentManager, this)
 
-        when(Random().nextInt(5) + 1) {
-            1 -> binding.ivThumb.load(R.drawable.pic1)
-            2 -> binding.ivThumb.load(R.drawable.pic2)
-            3 -> binding.ivThumb.load(R.drawable.pic3)
-            4 -> binding.ivThumb.load(R.drawable.pic4)
-            5 -> binding.ivThumb.load(R.drawable.pic5)
+        when(arguments?.getString("search_word")) {
+            "맛집" -> binding.ivThumb.setImageResource(R.drawable.ic_restraunt)
+            "관광지" -> binding.ivThumb.setImageResource(R.drawable.ic_map)
+            "숙박" -> binding.ivThumb.setImageResource(R.drawable.ic_hotel)
         }
 
         // 마커 추가
@@ -72,13 +73,11 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
         binding.apply {
             // 해당 위치의 이름과 주소 및 사진 출력
-            tvTitle.text = searchResultActivityViewModel.bottomTitle.value
-            tvAddress.text = searchResultActivityViewModel.bottomAddress.value
-            ivThumb.load("https://picsum.photos/200/300") {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
+            tvTitle.text = searchResultActivityViewModel.bottomTitle.value?.let { removeHtmlTag(it) }
+            tvAddress.text = searchResultActivityViewModel.bottomAddress.value?.let {
+                removeHtmlTag(
+                    it
+                )
             }
         }
 

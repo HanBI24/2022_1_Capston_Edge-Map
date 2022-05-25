@@ -3,6 +3,7 @@ package com.example.hotplenavigation.view.bottom_menu.search.search_result
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.location.Location
+import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
@@ -11,6 +12,8 @@ import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.databinding.FragmentSearchResultBinding
+import com.example.hotplenavigation.util.extension.makeToast
+import com.example.hotplenavigation.util.extension.removeHtmlTag
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -64,7 +67,11 @@ class SearchResultActivity :
     override fun initView() {
         val word = intent.getStringExtra("search_fragment")
         val searchWord = intent.getStringExtra("search_word_fragment")
-        Toast.makeText(this, word+searchWord, Toast.LENGTH_SHORT).show()
+
+        val bundle = Bundle()
+        bundle.putString("search_word", searchWord)
+        sheet.arguments = bundle
+
         setNaverMapRender(R.id.map_fragment, supportFragmentManager, this)
 
         // 현재 위치 찾기
@@ -106,16 +113,19 @@ class SearchResultActivity :
             LatLngY = it.y.toDouble()
             LatLngX = it.x.toDouble()
 
-            Log.d("SearchFragment", "$LatLngY,$LatLngX")
-
-            // 저장한 위도, 경도 값으로, 현재 위치부터 목적지(검색어)까지 최적의 경로 탐색
-            searchResultActivityViewModel.getResultPath(
-                "uzlzuhd2pa",
-                "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
-                "${currentLocation.longitude},${currentLocation.latitude}",
-                "$LatLngX,$LatLngY",
-                "traavoidtoll"
-            )
+            try {
+                // 저장한 위도, 경도 값으로, 현재 위치부터 목적지(검색어)까지 최적의 경로 탐색
+                searchResultActivityViewModel.getResultPath(
+                    "uzlzuhd2pa",
+                    "INnDxBgwB6Tt20sjSdFEqi6smxIBUNp4r7EkDUBc",
+                    "${currentLocation.longitude},${currentLocation.latitude}",
+                    "$LatLngX,$LatLngY",
+                    "traavoidtoll"
+                )
+            } catch (unInitial: UninitializedPropertyAccessException) {
+                makeToast(this, "다시 시도해주세요.")
+                finish()
+            }
         })
 
         // 마커 정보 창 객체 생성
@@ -142,12 +152,12 @@ class SearchResultActivity :
 
                 // 마커 제목 설정 (음식점, 관광명소 등 이름)
                 for (i in searchResultTitleList) {
-                    marker.tag = i
+                    marker.tag = removeHtmlTag(i)
                 }
 
                 // 마커 주소 설정 (음식점, 관광명소 등 이름)
                 for (i in searchResultAddressList) {
-                    marker.captionText = i
+                    marker.captionText = removeHtmlTag(i)
                 }
 
                 // 캡션 사이즈를 0으로 설정해 화면에 보이지 않도록 설정

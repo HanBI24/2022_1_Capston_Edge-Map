@@ -25,10 +25,10 @@
                 android:id="@+id/btn_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/bottom_nav"
                 android:paddingStart="32dp"
-                android:paddingBottom="28dp" />
+                android:paddingBottom="28dp"
+                app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <!-- elevation: Set shadow option -->
             <!-- labelVisibilityMode: You can see label always in bottom navigation(default: selected)-->
@@ -39,13 +39,13 @@
                 android:layout_margin="20dp"
                 android:background="@drawable/bottom_nav_bg"
                 android:elevation="2dp"
+                app:itemIconTint="@drawable/menu_selector_color"
+                app:itemTextColor="@drawable/menu_selector_color"
                 app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:menu="@menu/bottom_menu"
-                app:itemIconTint="@drawable/menu_selector_color"
-                app:itemTextColor="@drawable/menu_selector_color"/>
+                app:menu="@menu/bottom_menu" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

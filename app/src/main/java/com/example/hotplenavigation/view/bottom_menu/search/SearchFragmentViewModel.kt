@@ -34,6 +34,10 @@ class SearchFragmentViewModel @Inject constructor(
     val getNumber: MutableLiveData<Int>
         get() = _getNumber
 
+    val getPhotoNumber = MutableLiveData<Int>()
+
+    val getRadioSelected = MutableLiveData<String>()
+
     fun getDuruData(
         serviceKey: String,
         pageNo: Int,

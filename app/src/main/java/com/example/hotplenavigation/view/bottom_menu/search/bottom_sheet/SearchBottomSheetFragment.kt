@@ -12,6 +12,7 @@ import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.databinding.FragmentSearchBottomSheetBinding
+import com.example.hotplenavigation.util.extension.removeHtmlTag
 import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewActivity
 import com.example.hotplenavigation.view.bottom_menu.search.SearchFragmentViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
@@ -31,36 +32,18 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
     ): View {
         _binding = FragmentSearchBottomSheetBinding.inflate(inflater, container, false)
 
-        when(Random().nextInt(5) + 1) {
-            1 -> binding.ivThumb.load(R.drawable.pic1) {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
+        when(searchFragmentViewModel.getPhotoNumber.value) {
+            1 -> {
+                binding.ivThumb.setImageResource(R.drawable.pic1)
             }
-            2 -> binding.ivThumb.load(R.drawable.pic2) {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
+            2 -> {
+                binding.ivThumb.setImageResource(R.drawable.pic2)
             }
-            3 -> binding.ivThumb.load(R.drawable.pic3) {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
+            3 -> {
+                binding.ivThumb.setImageResource(R.drawable.pic3)
             }
-            4 -> binding.ivThumb.load(R.drawable.pic4) {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
-            }
-            5 -> binding.ivThumb.load(R.drawable.pic5) {
-                crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                transformations(CircleCropTransformation())
-                memoryCachePolicy(CachePolicy.DISABLED)
+            4 -> {
+                binding.ivThumb.setImageResource(R.drawable.pic4)
             }
         }
 
@@ -101,10 +84,5 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
                 startActivity(intent)
             }
         }
-    }
-
-    private fun removeHtmlTag(desc: String): String {
-        val replaceRegex = "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>".toRegex()
-        return desc.replace(replaceRegex, "")
     }
 }

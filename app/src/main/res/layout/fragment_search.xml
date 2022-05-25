@@ -14,17 +14,53 @@
             android:id="@+id/container_search"
             android:layout_width="0dp"
             android:layout_height="110dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/search_arc_view"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@drawable/search_arc_view">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
 
+                <RadioGroup
+                    android:id="@+id/rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@id/rd_food"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rd_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="14dp"
+                        android:text="맛집"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rd_fame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="관광지"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rd_sleep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="숙박"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </RadioGroup>
                 <EditText
                     android:id="@+id/et_search"
                     android:layout_width="match_parent"
@@ -32,51 +68,16 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:hint="목적지를 입력하세요."
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/search_outline"
                     android:drawableStart="@drawable/ic_search"
                     android:drawablePadding="12dp"
-                    android:paddingLeft="12dp"
-                    android:background="@drawable/search_outline"
-                    android:layout_marginBottom="10dp"
-                    android:inputType="text"
+                    android:hint="목적지를 입력하세요."
                     android:imeOptions="actionSearch"
-                    android:maxLines="1"/>
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="12dp" />
 
-                <RadioGroup
-                    android:id="@+id/rg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:checkedButton="@id/rd_food">
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rd_food"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="맛집"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:padding="12dp"/>
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rd_fame"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="관광지"
-                        android:textStyle="bold"
-                        android:padding="12dp"
-                        android:textColor="@color/white"  />
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rd_sleep"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="숙박"
-                        android:textStyle="bold"
-                        android:padding="12dp"
-                        android:textColor="@color/white" />
-                </RadioGroup>
             </LinearLayout>
 
         </FrameLayout>
@@ -95,13 +96,13 @@
                 android:id="@+id/card_view1"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/ic_warning"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="12dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/card_view2"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="16dp">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:id="@+id/container1"
@@ -142,6 +143,19 @@
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="추천 관광지"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/card_view2"
+                app:layout_constraintLeft_toRightOf="@id/card_view1"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textColor="#A3A3A3"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_view2"

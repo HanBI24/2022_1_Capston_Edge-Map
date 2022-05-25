@@ -31,7 +31,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
 
     override fun initView() {
         binding.rg.setOnCheckedChangeListener { radioGroup, checkId ->
-            when(checkId) {
+            when (checkId) {
                 R.id.rd_food -> searchWord = "맛집"
                 R.id.rd_fame -> searchWord = "관광지"
                 R.id.rd_sleep -> searchWord = "숙박"
@@ -45,11 +45,12 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
 
     private fun initSearchView() {
         binding.etSearch.setOnEditorActionListener { textView, actionId, _ ->
-            var handle = false;
+            var handle = false
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val intent = Intent(context, SearchResultActivity::class.java)
                 intent.putExtra("search_fragment", textView.text.toString())
                 intent.putExtra("search_word_fragment", searchWord)
+                searchFragmentViewModel.getRadioSelected.value = searchWord
                 startActivity(intent)
                 handle = true
             }
@@ -73,12 +74,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle1.text = it[0].response.body.items.item.themeNm
                         tvLineMsg1.text = it[0].response.body.items.item.linemsg
-//                        tvDesc1.text = removeHtmlTag(it[0].response.body.items.item.themedesc)
-//                        iv1.load("https://picsum.photos/200/300") {
-//                            crossfade(true)
-//                            placeholder(R.drawable.ic_warning)
-//                            memoryCachePolicy(CachePolicy.DISABLED)
-//                        }
                     } catch (idx: IndexOutOfBoundsException) {
                         tvTitle1.text = "준비중..."
                         tvLineMsg1.text = "준비중..."
@@ -93,16 +88,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle2.text = it[1].response.body.items.item.themeNm
                         tvLineMsg2.text = it[1].response.body.items.item.linemsg
-//                        tvDesc2.text = removeHtmlTag(it[1].response.body.items.item.themedesc)
-//                        iv2.load("https://picsum.photos/200/300") {
-//                            crossfade(true)
-//                            placeholder(R.drawable.ic_warning)
-//                            memoryCachePolicy(CachePolicy.DISABLED)
-//                        }
                     } catch (idx: IndexOutOfBoundsException) {
                         tvTitle2.text = "준비중..."
                         tvLineMsg2.text = "준비중..."
-//                        tvDesc2.text = "준비중..."
                     }
                 }
             })
@@ -112,16 +100,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle3.text = it[2].response.body.items.item.themeNm
                         tvLineMsg3.text = it[2].response.body.items.item.linemsg
-//                        tvDesc3.text = removeHtmlTag(it[2].response.body.items.item.themedesc)
-//                        iv3.load("https://picsum.photos/200/300") {
-////                            crossfade(true)
-////                            placeholder(R.drawable.ic_warning)
-////                            memoryCachePolicy(CachePolicy.DISABLED)
-//                        }
                     } catch (idx: IndexOutOfBoundsException) {
                         tvTitle3.text = "준비중..."
                         tvLineMsg3.text = "준비중..."
-//                        tvDesc3.text = "준비중..."
                     }
                 }
             })
@@ -131,16 +112,9 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
                     try {
                         tvTitle4.text = it[3].response.body.items.item.themeNm
                         tvLineMsg4.text = it[3].response.body.items.item.linemsg
-//                        tvDesc4.text = removeHtmlTag(it[3].response.body.items.item.themedesc)
-//                        iv4.load("https://picsum.photos/200/300") {
-//                            crossfade(true)
-//                            placeholder(R.drawable.ic_warning)
-//                            memoryCachePolicy(CachePolicy.DISABLED)
-//                        }
                     } catch (idx: IndexOutOfBoundsException) {
                         tvTitle4.text = "준비중..."
                         tvLineMsg4.text = "준비중..."
-//                        tvDesc4.text = "준비중..."
                     }
                 }
             })
@@ -151,25 +125,40 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
         binding.apply {
             container1.setOnClickListener {
                 searchFragmentViewModel.getNumber.value = 1
-                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+                fragmentManager?.let { it1 ->
+                    run {
+                        sheet.show(it1, "SearchBottomSheetFragment")
+                        searchFragmentViewModel.getPhotoNumber.value = 1
+                    }
+                }
             }
             container2.setOnClickListener {
                 searchFragmentViewModel.getNumber.value = 2
-                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+                fragmentManager?.let { it1 ->
+                    run {
+                        sheet.show(it1, "SearchBottomSheetFragment")
+                        searchFragmentViewModel.getPhotoNumber.value = 2
+                    }
+                }
             }
             container3.setOnClickListener {
                 searchFragmentViewModel.getNumber.value = 3
-                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+                fragmentManager?.let { it1 ->
+                    run {
+                        sheet.show(it1, "SearchBottomSheetFragment")
+                        searchFragmentViewModel.getPhotoNumber.value = 3
+                    }
+                }
             }
             container4.setOnClickListener {
                 searchFragmentViewModel.getNumber.value = 4
-                fragmentManager?.let { it1 -> sheet.show(it1, "SearchBottomSheetFragment") }
+                fragmentManager?.let { it1 ->
+                    run {
+                        sheet.show(it1, "SearchBottomSheetFragment")
+                        searchFragmentViewModel.getPhotoNumber.value = 4
+                    }
+                }
             }
         }
-    }
-
-    private fun removeHtmlTag(desc: String): String {
-        val replaceRegex = "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>".toRegex()
-        return desc.replace(replaceRegex, "")
     }
 }

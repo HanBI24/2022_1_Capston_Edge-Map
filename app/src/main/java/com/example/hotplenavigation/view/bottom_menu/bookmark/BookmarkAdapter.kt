@@ -9,6 +9,7 @@ import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.databinding.RecyclerBookmarkItemBinding
+import com.example.hotplenavigation.util.extension.removeHtmlTag
 
 // 즐겨찾기 화면에 있는 RecyclerView 사용을 위한 Adapter 설정
 class BookmarkAdapter(
@@ -51,8 +52,8 @@ class BookmarkAdapter(
             onClickButton: (bookmarkData: BookmarkFragmentEntity) -> Unit
         ) {
             // 이름 및 주소, 사진 설정
-            binding.tvPlace.text = bookmarkData.title
-            binding.tvAddress.text = bookmarkData.address
+            binding.tvPlace.text = removeHtmlTag(bookmarkData.title)
+            binding.tvAddress.text = removeHtmlTag(bookmarkData.address)
 //            binding.ivThumb.load("https://picsum.photos/200/300") {
 //                crossfade(true)
 //                placeholder(R.drawable.ic_launcher_foreground)
