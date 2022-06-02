@@ -5,6 +5,7 @@ import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+// 20165304 김성곤
 // Room DB를 사용하여 데이터를 받아오는 Repository
 class BookmarkFragmentRepository @Inject constructor(
     private val bookmarkFragmentDao: BookmarkFragmentDao

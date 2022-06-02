@@ -9,6 +9,7 @@ import com.example.hotplenavigation.view.bottom_menu.search.SearchFragment
 import com.example.hotplenavigation.view.bottom_menu.setting.CommFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+// 20165304 김성곤
 // Fragment 전환 액티비티
 @AndroidEntryPoint
 class BottomMenuActivity : BindingActivity<ActivityBottomMenuBinding>(R.layout.activity_bottom_menu) {

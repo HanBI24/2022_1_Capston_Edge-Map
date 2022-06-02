@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+// 20165304 김성곤
 interface DuruApi {
 
     @GET("openapi/service/rest/Durunubi/routeList")

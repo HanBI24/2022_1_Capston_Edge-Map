@@ -17,6 +17,7 @@ import com.naver.maps.map.overlay.Marker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+// 20165304 김성곤
 // API와 통신하여 필요한 데이터를 필터링하는 ViewModel
 @HiltViewModel
 class SearchResultActivityViewModel @Inject constructor(

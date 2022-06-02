@@ -12,6 +12,7 @@ import com.example.hotplenavigation.repository.GetSearchResultRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+// 20165304 김성곤, 20197138 장은지
 // API 및 여러 기능을 테스트 하기 위한 테스트 뷰모델
 @HiltViewModel
 class TestActivityViewModel @Inject constructor(

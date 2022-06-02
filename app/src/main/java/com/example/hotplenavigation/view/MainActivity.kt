@@ -14,6 +14,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 
+// 20165304 김성곤
 // 앱 시작 시 처음 보여지는 Activity
 @AndroidEntryPoint
 class MainActivity :

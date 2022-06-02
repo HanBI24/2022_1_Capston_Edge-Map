@@ -6,6 +6,7 @@ import com.example.hotplenavigation.HotPleNavigationApplication
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
+// 20165304 김성곤
 // 해당 기기의 픽셀을 가져와 Alert Dialog를 띄울 때 사용하는 확장 파일
 class PixelRatio @Inject constructor(
     private val application: Application

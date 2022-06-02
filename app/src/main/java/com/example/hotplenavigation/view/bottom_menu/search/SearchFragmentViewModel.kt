@@ -8,6 +8,7 @@ import com.example.hotplenavigation.repository.GetDuruRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+// 20165304 김성곤
 // 검색 ViewModel
 @HiltViewModel
 class SearchFragmentViewModel @Inject constructor(

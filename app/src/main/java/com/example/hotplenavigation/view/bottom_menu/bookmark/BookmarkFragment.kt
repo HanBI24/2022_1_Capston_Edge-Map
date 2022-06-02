@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
+// 20165304 김성곤, 20197138 장은지
 // 즐겨찾기 Fragment (Local DB: Android Jetpack Room Library)
 @AndroidEntryPoint
 class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragment_bookmark) {

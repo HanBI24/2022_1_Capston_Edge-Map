@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IndexOutOfBoundsException
 import java.util.Random
 
+// 20165304 김성곤, 20197138 장은지
 // 검색 Fragment
 @AndroidEntryPoint
 class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {

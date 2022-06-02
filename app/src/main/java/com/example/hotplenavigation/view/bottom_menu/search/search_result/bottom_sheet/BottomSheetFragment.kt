@@ -27,6 +27,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.MarkerIcons
 import dagger.hilt.android.AndroidEntryPoint
 
+// 20165304 김성곤, 20197138 장은지
 // 검색 결과 화면에서 사용자가 누른 마커의 정보를 출력해주는 Fragment
 @AndroidEntryPoint
 class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {

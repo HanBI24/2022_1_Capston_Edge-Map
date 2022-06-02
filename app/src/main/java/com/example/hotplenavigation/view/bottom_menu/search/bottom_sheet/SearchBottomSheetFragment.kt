@@ -14,6 +14,7 @@ import com.example.hotplenavigation.view.bottom_menu.search.SearchFragmentViewMo
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+// 20165304 김성곤, 20197138 장은지
 @AndroidEntryPoint
 class SearchBottomSheetFragment : BottomDrawerFragment() {
     private var _binding: FragmentSearchBottomSheetBinding? = null

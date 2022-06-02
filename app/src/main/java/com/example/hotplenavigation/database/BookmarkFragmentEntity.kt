@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// 20165304 김성곤
 // Room DB를 사용하기 위한 Entity 설정
 @Entity(tableName = "frag_bookmark")
 class BookmarkFragmentEntity(

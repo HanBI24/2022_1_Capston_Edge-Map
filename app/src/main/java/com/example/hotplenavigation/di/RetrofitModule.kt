@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+// 20165304 김성곤
 // Retrofit 사용하기 위한 Module
 // 보일러 플레이트 코드 감소 및 의존성을 제거하기 위해
 // DI Library 중 하나인 Dagger-Hilt를 사용

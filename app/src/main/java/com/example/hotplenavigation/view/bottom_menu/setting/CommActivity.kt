@@ -17,6 +17,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 
+// 20165304 김성곤
 @AndroidEntryPoint
 class CommActivity : BindingActivity<FragmentCommBinding>(R.layout.fragment_comm) {
     private val commActivityViewModel: CommActivityViewModel by viewModels()

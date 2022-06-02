@@ -38,6 +38,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
+// 20165304 김성곤
 // 검색 결과 Activity
 @AndroidEntryPoint
 class SearchResultActivity :

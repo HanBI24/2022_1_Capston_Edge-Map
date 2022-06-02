@@ -6,6 +6,7 @@ import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityWebBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+// 20197138 장은지
 // 해당 위치 정보를 더욱 자세히 알기 위한 WebView Activity
 @AndroidEntryPoint
 class WebViewActivity : BindingActivity<ActivityWebBinding>(R.layout.activity_web) {

@@ -1,5 +1,6 @@
 package com.example.hotplenavigation.data.search_result
 
+// 20197138 장은지
 data class Item(
     val address: String,
     val category: String,

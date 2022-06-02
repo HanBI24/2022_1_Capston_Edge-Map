@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
+// 20165304 김성곤
 // Naver Map API 호출을 위한 interface
 interface NaverMapApi {
 

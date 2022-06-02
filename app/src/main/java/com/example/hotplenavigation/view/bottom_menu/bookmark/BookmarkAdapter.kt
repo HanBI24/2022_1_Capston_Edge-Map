@@ -7,6 +7,7 @@ import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.databinding.RecyclerBookmarkItemBinding
 import com.example.hotplenavigation.util.extension.removeHtmlTag
 
+// 20197138 장은지
 // 즐겨찾기 화면에 있는 RecyclerView 사용을 위한 Adapter 설정
 class BookmarkAdapter(
     private var bookmarkList: List<BookmarkFragmentEntity>,

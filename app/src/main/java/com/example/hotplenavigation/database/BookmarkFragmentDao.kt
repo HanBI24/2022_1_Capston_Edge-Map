@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
+// 20165304 김성곤
 // Room DB를 사용하기 위한 DAO 인터페이스 작성
 @Dao
 interface BookmarkFragmentDao {

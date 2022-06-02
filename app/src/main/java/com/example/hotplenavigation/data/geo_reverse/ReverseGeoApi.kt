@@ -1,5 +1,6 @@
 package com.example.hotplenavigation.data.geo_reverse
 
+// 20197138 장은지
 data class ReverseGeoApi(
     val results: List<Result1>?
 )

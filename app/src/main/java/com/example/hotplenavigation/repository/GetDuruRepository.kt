@@ -10,6 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+// 20165304 김성곤
 class GetDuruRepository @Inject constructor(
     @RetrofitModule.DuruType private val duruData: DuruApi
 ) {

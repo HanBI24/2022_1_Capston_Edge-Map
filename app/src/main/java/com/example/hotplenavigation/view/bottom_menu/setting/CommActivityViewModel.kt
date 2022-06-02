@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+// 20165304 김성곤
 @HiltViewModel
 class CommActivityViewModel @Inject constructor() : ViewModel() {
 

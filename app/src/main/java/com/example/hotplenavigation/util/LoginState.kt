@@ -2,6 +2,7 @@ package com.example.hotplenavigation.util
 
 import android.net.Uri
 
+// 20165304 김성곤
 sealed class LoginState {
 
     object UnInitialized : LoginState()

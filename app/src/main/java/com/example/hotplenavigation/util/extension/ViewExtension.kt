@@ -4,6 +4,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
+// 20165304 김성곤
 // Fragment 전환 이벤트를 쉽게 사용하기 위한 확장 파일
 fun AppCompatActivity.replace(
     @IdRes frameId: Int,

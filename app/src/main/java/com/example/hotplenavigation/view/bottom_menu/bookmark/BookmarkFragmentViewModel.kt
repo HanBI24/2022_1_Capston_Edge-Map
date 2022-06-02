@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// 20165304 김성곤
 // Local DB(Room)와 통신하기 위하여 필요한 데이터를 필터링하는 ViewModel
 @HiltViewModel
 class BookmarkFragmentViewModel @Inject constructor(
