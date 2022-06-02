@@ -3,14 +3,11 @@ package com.example.hotplenavigation.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.hotplenavigation.data.duru.Duru
-import com.example.hotplenavigation.data.geo.Addresse
-import com.example.hotplenavigation.data.geo.GeoApi
 import com.example.hotplenavigation.di.RetrofitModule
 import com.example.hotplenavigation.network.DuruApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class GetDuruRepository @Inject constructor(

@@ -1,26 +1,16 @@
 package com.example.hotplenavigation.view.bottom_menu.search
 
-import android.app.Activity
 import android.content.Intent
-import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import coil.load
-import coil.request.CachePolicy
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
 import com.example.hotplenavigation.databinding.FragmentSearchBinding
 import com.example.hotplenavigation.view.bottom_menu.search.bottom_sheet.SearchBottomSheetFragment
 import com.example.hotplenavigation.view.bottom_menu.search.search_result.SearchResultActivity
-import com.iammert.library.ui.multisearchviewlib.MultiSearchView
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IndexOutOfBoundsException
-import java.util.*
+import java.util.Random
 
 // 검색 Fragment
 @AndroidEntryPoint
@@ -30,7 +20,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(R.layout.fragment_
     private var searchWord: String = "맛집"
 
     override fun initView() {
-        binding.rg.setOnCheckedChangeListener { radioGroup, checkId ->
+        binding.rg.setOnCheckedChangeListener { _, checkId ->
             when (checkId) {
                 R.id.rd_food -> searchWord = "맛집"
                 R.id.rd_fame -> searchWord = "관광지"

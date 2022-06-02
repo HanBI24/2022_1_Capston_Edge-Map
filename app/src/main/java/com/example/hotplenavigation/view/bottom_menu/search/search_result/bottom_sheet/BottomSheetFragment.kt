@@ -7,12 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import coil.load
-import coil.request.CachePolicy
-import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.databinding.FragmentBottomSheetBinding
-import com.example.hotplenavigation.util.extension.makeToast
 import com.example.hotplenavigation.util.extension.removeHtmlTag
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewActivity
@@ -52,7 +48,7 @@ class BottomSheetFragment : BottomDrawerFragment(), OnMapReadyCallback {
 
         setNaverMapRender(R.id.container_map_temp, childFragmentManager, this)
 
-        when(arguments?.getString("search_word")) {
+        when (arguments?.getString("search_word")) {
             "맛집" -> binding.ivThumb.setImageResource(R.drawable.ic_restraunt)
             "관광지" -> binding.ivThumb.setImageResource(R.drawable.ic_map)
             "숙박" -> binding.ivThumb.setImageResource(R.drawable.ic_hotel)

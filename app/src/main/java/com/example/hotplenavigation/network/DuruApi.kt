@@ -17,6 +17,4 @@ interface DuruApi {
         @Query("brdDiv") brdDiv: String = "DNWW",
         @Query("_type") _type: String = "json"
     ): Call<Duru>
-
 }
-

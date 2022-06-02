@@ -72,7 +72,7 @@
                     android:background="@drawable/search_outline"
                     android:drawableStart="@drawable/ic_search"
                     android:drawablePadding="12dp"
-                    android:hint="목적지를 입력하세요."
+                    android:hint="목적지를 입력하세요. (지역명)"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"

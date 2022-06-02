@@ -9,6 +9,5 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecommendActivity : BindingActivity<ActivityRecommendBinding>(R.layout.activity_recommend) {
 
     override fun initView() {
-
     }
 }

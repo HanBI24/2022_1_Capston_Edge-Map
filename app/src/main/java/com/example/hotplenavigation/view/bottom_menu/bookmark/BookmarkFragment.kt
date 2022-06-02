@@ -10,7 +10,6 @@ import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingFragment
 import com.example.hotplenavigation.databinding.FragmentBookmarkBinding
 import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewActivity
-import com.example.hotplenavigation.view.bottom_menu.search.search_result.bottom_sheet.BottomSheetFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +51,6 @@ class BookmarkFragment : BindingFragment<FragmentBookmarkBinding>(R.layout.fragm
             },
             // 버튼 클릭 시 해당 장소의 정보를 표시하는 웹뷰 Activity 이동
             onClickButton = {
-
             }
         )
 

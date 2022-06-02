@@ -3,10 +3,6 @@ package com.example.hotplenavigation.view.bottom_menu.bookmark
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.request.CachePolicy
-import coil.transform.CircleCropTransformation
-import com.example.hotplenavigation.R
 import com.example.hotplenavigation.database.BookmarkFragmentEntity
 import com.example.hotplenavigation.databinding.RecyclerBookmarkItemBinding
 import com.example.hotplenavigation.util.extension.removeHtmlTag

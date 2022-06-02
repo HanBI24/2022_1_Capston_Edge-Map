@@ -6,10 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import coil.load
-import coil.request.CachePolicy
-import coil.transform.CircleCropTransformation
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.databinding.FragmentSearchBottomSheetBinding
 import com.example.hotplenavigation.util.extension.removeHtmlTag
@@ -17,7 +13,6 @@ import com.example.hotplenavigation.view.bottom_menu.bookmark.webview.WebViewAct
 import com.example.hotplenavigation.view.bottom_menu.search.SearchFragmentViewModel
 import com.github.heyalex.bottomdrawer.BottomDrawerFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class SearchBottomSheetFragment : BottomDrawerFragment() {
@@ -32,7 +27,7 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
     ): View {
         _binding = FragmentSearchBottomSheetBinding.inflate(inflater, container, false)
 
-        when(searchFragmentViewModel.getPhotoNumber.value) {
+        when (searchFragmentViewModel.getPhotoNumber.value) {
             1 -> {
                 binding.ivThumb.setImageResource(R.drawable.pic1)
             }
@@ -54,7 +49,7 @@ class SearchBottomSheetFragment : BottomDrawerFragment() {
 
     private fun initTextView() {
         binding.apply {
-            when(searchFragmentViewModel.getNumber.value) {
+            when (searchFragmentViewModel.getNumber.value) {
                 1 -> {
                     tvTitle.text = searchFragmentViewModel.getDuruData1.value?.get(0)?.response?.body?.items?.item?.themeNm!!
                     tvLineMsg.text = searchFragmentViewModel.getDuruData1.value?.get(0)?.response?.body?.items?.item?.linemsg!!

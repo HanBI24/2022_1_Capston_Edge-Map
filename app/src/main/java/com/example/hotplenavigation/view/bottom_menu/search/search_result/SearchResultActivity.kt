@@ -6,7 +6,6 @@ import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.hotplenavigation.R
 import com.example.hotplenavigation.base.BindingActivity

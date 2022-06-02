@@ -8,7 +8,6 @@ import com.example.hotplenavigation.base.BindingActivity
 import com.example.hotplenavigation.databinding.ActivityMainBinding
 import com.example.hotplenavigation.util.extension.setNaverMapRender
 import com.example.hotplenavigation.view.bottom_menu.BottomMenuActivity
-import com.example.hotplenavigation.view.bottom_menu.setting.CommActivity
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
@@ -49,8 +48,8 @@ class MainActivity :
                     return@setOnNavigationItemSelectedListener true
                 }
 //                R.id.bottom_menu_setting -> {
-////                    intent.putExtra("bottom_nav", "bnv_setting")
-////                    startActivity(intent)
+// //                    intent.putExtra("bottom_nav", "bnv_setting")
+// //                    startActivity(intent)
 //                    val commIntent = Intent(this@MainActivity, CommActivity::class.java)
 //                    startActivity(commIntent)
 //                    return@setOnNavigationItemSelectedListener true

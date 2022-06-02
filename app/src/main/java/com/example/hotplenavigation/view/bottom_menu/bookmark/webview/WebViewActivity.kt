@@ -25,7 +25,7 @@ class WebViewActivity : BindingActivity<ActivityWebBinding>(R.layout.activity_we
         // 웹뷰 띄우기
         binding.webView.apply {
             webViewClient = WebViewClient()
-            if(address == null) {
+            if (address == null) {
                 loadUrl("https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=$recommend")
             } else {
                 loadUrl("https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=$address")
