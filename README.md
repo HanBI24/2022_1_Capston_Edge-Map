@@ -4,7 +4,7 @@
   
   --- 
 ## How to Install
-1. Download 'app-debug.apk' file.
+1. Download 'app-debug.apk' file. (Releases or in this repository sourcetree)
 2. Install your Android phone.
 
 ### LICENSE
